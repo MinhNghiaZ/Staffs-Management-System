@@ -27,8 +27,8 @@
          <children>
             <VBox>
                <children>
-                  <Label text="Hello, Again" />
-                  <Label text="We are happy to have you back">
+                  <Label text="Chào Mừng" />
+                  <Label text="Phần Mềm Quản Lý Nhân Viên" style="-fx-font-size: 20px; -fx-text-fill: #0a3fbd; -fx-font-weight: bold;">
                      <padding>
                         <Insets top="10.0" />
                      </padding>
