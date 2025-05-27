@@ -1,0 +1,50 @@
+.top-form{
+    -fx-background-color:#fff;
+    -fx-border-color:#000;
+    -fx-border-width:.4px .4px .2px .4px;
+}
+
+.semi-top-form{
+    -fx-background-color:#efefef;
+    -fx-border-color:#000;
+    -fx-border-width:.2px .4px .8px .4px;
+}
+
+.close{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+
+.close:hover{
+    -fx-background-color: #ff3547;
+}
+
+.minimize{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+
+.minimize:hover{
+    -fx-background-color:#ddd;
+}
+
+.nav-form {
+    -fx-background-color: linear-gradient(to top right, #ADD8E6, #FFFFFF); /* Light blue to white */
+}
+
+.nav-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent white for slight visibility */
+    -fx-cursor: hand;
+    -fx-font-family: "Arial";
+    -fx-font-size: 15px;
+    -fx-text-fill: #333333; /* Dark grey for text */
+    -fx-border-radius: 5px; /* Add some rounded corners for a softer look */
+    -fx-padding: 5px 15px; /* Add some padding around the text */
+    -fx-border-color: #000000; /* Border color for better visibility */
+    -fx-border-width: 0.2px; /* Border width for better visibility */
+}
+
+.nav-btn:hover {
+    -fx-background-color: #ADD8E6; /* Full light blue on hover */
+    -fx-text-fill: #FFFFFF; /* White text on hover for good contrast */
+}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="45.0" prefWidth="200.0" styleClass="semi-top-form" stylesheets="@AdminUi.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="127.0" layoutY="-77.0" prefHeight="35.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@AdminUi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="USERS" layoutX="14.0" layoutY="28.0" size="1.5em" />
+                              <Label layoutX="42.0" layoutY="13.0" text="Security Guard Management System">
+                                 <font>
+                                    <Font name="Tahoma" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="1034.0" layoutY="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="60.0" styleClass="close" stylesheets="@AdminUi.css" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="10.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="CLOSE" size="1.2em" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="994.0" layoutY="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="40.0" styleClass="minimize" stylesheets="@AdminUi.css">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="WINDOW_MINIMIZE" size="1.2em" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="14.0" layoutY="69.0" prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@AdminUi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="USER" layoutX="76.0" layoutY="86.0" size="7em" />
+                              <Label alignment="CENTER" layoutY="110.0" prefHeight="17.0" prefWidth="211.0" text="Welcome,">
+                                 <font>
+                                    <Font name="Tahoma" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="1.0" layoutY="131.0" prefHeight="17.0" prefWidth="211.0" text="Admin">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="58.0" layoutX="126.0" layoutY="167.0" startX="-100.0" />
+                              <Button layoutX="15.0" layoutY="198.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@AdminUi.css" text="Home">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="HOME" size="1.5em" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="15.0" layoutY="233.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@AdminUi.css" text="Add New Schedule">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="BOOKMARK" size="1.5em" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="15.0" layoutY="268.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@AdminUi.css" text="Salary">
+                                 <graphic>
+                                    <EmojiOneView glyphName="MONEYBAG" size="1.5em" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="14.0" layoutY="511.0" mnemonicParsing="false" text="Log Out">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="SIGN_OUT" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="60.0" layoutY="110.0" prefHeight="555.0" prefWidth="888.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
