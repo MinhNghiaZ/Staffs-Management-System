@@ -17,7 +17,9 @@ public class Staff {
         ListOfDuty = listOfDuty;
     }
     
-    void Login(){};
+    public boolean Login(String name, String password){
+        return this.Name.equals(name) && this.Password.equals(password);
+    };
     void ViewSchedule(){};
     void CreateRequest(){};
     void ViewRoutine(){};

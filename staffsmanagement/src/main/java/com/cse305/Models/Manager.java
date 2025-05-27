@@ -17,7 +17,10 @@ public class Manager {
         ListOfRequest = listOfRequest;
     }
 
-    void Login(){};
+    public boolean Login(String name, String password){
+        return this.Name.equals(name) && this.Password.equals(password);
+    };
+    
     void Logout(){};
     ArrayList<Duty> CreateRoutine(){
         return null;
