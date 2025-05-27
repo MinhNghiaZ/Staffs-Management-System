@@ -17,10 +17,16 @@ public class Staff {
         ListOfDuty = listOfDuty;
     }
     
-    public boolean Login(String name, String password){
-        return this.Name.equals(name) && this.Password.equals(password);
+    public boolean Login(String id, String password){
+        return this.ID.equals(id) && this.Password.equals(password);
     };
-    void ViewSchedule(){};
+    void ViewSchedule(){
+        var sb = new StringBuilder();
+        for(var duty : ListOfDuty) {
+            sb.append("Place to work: " + duty.Name).append("\n").append(duty.StartTime + " => " + duty.EndTime);
+        }
+        System.out.println(sb);
+    };
     void CreateRequest(){};
     void ViewRoutine(){};
     void ViewSalary(){};

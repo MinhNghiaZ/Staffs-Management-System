@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.cse305.Models.DataManager;
 import com.cse305.Models.Manager;
 import com.cse305.Models.Request;
 
@@ -15,6 +16,7 @@ public class PrimaryController {
     //String iD, String name, String password, String role, ArrayList<Request> listOfRequest
     public HashMap<String, Manager> ManagerMap = new HashMap<>();
     public HashMap<String, String> StaffMap = new HashMap<>();
+    public DataManager dataManager = new DataManager();
     @FXML
     public TextField EmailInput;
     @FXML
@@ -37,14 +39,19 @@ public class PrimaryController {
     public void Login() {
         String id = EmailInput.getText();
         String pass = PasswordInput.getText();
-        if(ManagerMap.get(id) == null) {
-            System.out.println("id is incorrect");
+        // if(ManagerMap.get(id) == null) {
+        //     System.out.println("id is incorrect");
+        // } else {
+        //     if(pass.equals(ManagerMap.get(id).Password)) {
+        //         System.out.println("success");
+        //     } else {
+        //         System.out.println("password is incorrect");
+        //     }
+        // }
+        if(dataManager.login(id, pass)) {
+            System.out.println("hen qua duoc roi");
         } else {
-            if(pass.equals(ManagerMap.get(id).Password)) {
-                System.out.println("success");
-            } else {
-                System.out.println("password is incorrect");
-            }
+            System.out.println("chua dc dauu");
         }
     }
 }

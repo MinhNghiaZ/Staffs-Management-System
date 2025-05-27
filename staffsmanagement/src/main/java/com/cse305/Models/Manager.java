@@ -17,8 +17,8 @@ public class Manager {
         ListOfRequest = listOfRequest;
     }
 
-    public boolean Login(String name, String password){
-        return this.Name.equals(name) && this.Password.equals(password);
+    public boolean Login(String id, String password){
+        return this.ID.equals(id) && this.Password.equals(password);
     };
     
     void Logout(){};
