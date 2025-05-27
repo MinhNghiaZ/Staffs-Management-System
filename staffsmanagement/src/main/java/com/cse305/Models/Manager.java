@@ -9,6 +9,14 @@ public class Manager {
     public String Role;
     ArrayList<Request> ListOfRequest = new ArrayList<>();
 
+    public Manager(String iD, String name, String password, String role, ArrayList<Request> listOfRequest) {
+        ID = iD;
+        Name = name;
+        Password = password;
+        Role = role;
+        ListOfRequest = listOfRequest;
+    }
+
     void Login(){};
     void Logout(){};
     ArrayList<Duty> CreateRoutine(){

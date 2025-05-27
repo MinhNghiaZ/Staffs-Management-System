@@ -57,7 +57,7 @@
             </VBox>
             <HBox alignment="TOP_CENTER">
                <children>
-                  <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="321.0" text="Login" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#Login" prefHeight="30.0" prefWidth="321.0" text="Login" HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets left="-100.0" right="-100.0" top="30.0" />

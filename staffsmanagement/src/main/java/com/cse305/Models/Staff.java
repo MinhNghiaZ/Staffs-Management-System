@@ -8,7 +8,15 @@ public class Staff {
     public String Password;
     public String Role;
     ArrayList<Duty> ListOfDuty = new ArrayList<>();
-
+    
+    public Staff(String iD, String name, String password, String role, ArrayList<Duty> listOfDuty) {
+        ID = iD;
+        Name = name;
+        Password = password;
+        Role = role;
+        ListOfDuty = listOfDuty;
+    }
+    
     void Login(){};
     void ViewSchedule(){};
     void CreateRequest(){};
