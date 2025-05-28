@@ -78,3 +78,13 @@
     -fx-background-color:linear-gradient(to right, #2b303c, #525968);
     -fx-background-radius:5px;
 }
+#TablePane{
+    -fx-padding: 15px;
+}
+#dayCalender{
+    -fx-background-color: #2980b9;
+}
+#textday{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
