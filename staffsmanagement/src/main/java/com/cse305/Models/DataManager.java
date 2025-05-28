@@ -3,49 +3,96 @@ package com.cse305.Models;
 import java.util.ArrayList;
 
 public class DataManager {
-    public ArrayList<Manager> managerList = new ArrayList<>();
-    public ArrayList<Staff> staffList = new ArrayList<>();
 
-    public String loggedInRole = "";
+    public ArrayList<User> userList = new ArrayList<>();
+    public User loggedInUser;
 
-    public Manager createManagerAccount(String name, String password){
-        String id = "manager_"+managerList.size(); // might change to uuid or smth
-        // TODO: encrypt password, find a use for the "role" variable
-        Manager newManager = new Manager(id, name, password, "Manager", null);
-        
-        return newManager;
+    private static DataManager instance;
+
+    ////////////////////////////////////////////////////
+    // IMPORTANT: USE THIS WHEN Calling DataManager  //
+    // DO NOT CREATE NEW DataManager OBJECTS        //
+    // This is Singleton Pattern                   //
+    ////////////////////////////////////////////////
+    public static DataManager getInstance() {
+        if (instance == null) {
+            instance = new DataManager();
+        }
+        return instance;
     }
+
     
-    public Staff createStaffAccount(String name, String password){
-        String id = "staff_"+staffList.size();
-        Staff newStaff = new Staff(id, name, password, "Staff", null);
-        return newStaff;
+
+
+    //TODO: Implement methods to load and save user data from/to a file
+
+    /**
+     * Creates a new Manager account with the given ID, name, and password.
+     * If the ID already exists, it will not create a new account and return false.
+     * @param id
+     * @param name
+     * @param password
+     * @return boolean indicating success or failure of account creation
+     */
+    public boolean createManagerAccount(String id, String name, String password) {
+        // TODO: encrypt password
+        if (checkExist(id)) {
+            System.out.println("ID already exists. Please choose a different ID.");
+            return false;
+        }
+        Manager newManager = new Manager(id, name, password, null);
+        userList.add(newManager);
+        System.out.println("Manager account created successfully.");
+        return true;
     }
 
-    public boolean login(String id, String password){
-        Manager m1 = new Manager("1", "name1", "pass1", "Manager", null);
-        Manager m2 = new Manager("2", "name2", "pass2", "Manager", null);
-        Manager m3 = new Manager("3", "name3", "pass3", "Manager", null);
-        managerList.add(m1);
-        managerList.add(m3);
-        managerList.add(m2);
-        //TODO: encrypt password before checking
-        for (Manager manager : managerList){
-            if (manager.Login(id,password)){
-                loggedInRole = "Manager";
-                System.out.println("ok");
+    /**
+     * Creates a new Staff account with the given ID, name, and password.
+     * If the ID already exists, it will not create a new account and return false.
+     * @param id
+     * @param name
+     * @param password
+     * @return boolean indicating success or failure of account creation
+     */
+    public boolean createStaffAccount(String id, String name, String password) {
+        if (checkExist(id)) {
+            System.out.println("ID already exists. Please choose a different ID.");
+            return false;
+        }
+        Staff newStaff = new Staff(id, name, password, null);
+        userList.add(newStaff);
+        System.out.println("Staff account created successfully.");
+        return true;
+    }
+
+
+    public boolean login(String id, String password) {
+
+        // TODO: encrypt password before checking
+        if (checkExist(id) == false) {
+            System.out.println("ID does not exist. Please register first.");
+            return false;
+        }
+
+        for (User user : userList) {
+            if (user.login(id, password)) {
+                loggedInUser = user;
+                System.out.println("Login successful. Role: " + loggedInUser.getRole());
                 return true;
             }
         }
-        for (Staff staff : staffList){
-            if (staff.Login(id,password)){
-                loggedInRole = "Staff";
-                System.out.println("ok");
-                return true;
-            }
-        }
-        System.out.println("not ok");
+
+        System.out.println("Login failed. Incorrect password.");
         return false;
     }
 
+    // Private methods
+    private boolean checkExist(String id) {
+        for (User user : userList) {
+            if (user.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

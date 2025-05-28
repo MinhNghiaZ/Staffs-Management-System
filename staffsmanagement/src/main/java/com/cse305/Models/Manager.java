@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Manager extends User {
     private ArrayList<Request> ListOfRequest = new ArrayList<>();
-
-    public Manager(String iD, String name, String password, String role, ArrayList<Request> listOfRequest) {
-       super(iD, name, password, role);
+    
+    public Manager(String iD, String name, String password, ArrayList<Request> listOfRequest) {
+       super(iD, name, password, "Manager");
         ListOfRequest = listOfRequest;
     }
     
@@ -17,7 +17,7 @@ public class Manager extends User {
     ArrayList<Duty> CreateRoutine(){
         return null;
     };
-    
+
     void ViewRoutineOfAllStaff(ArrayList<Staff> staffs){};
     void ViewSalaryOfAllStaff(ArrayList<Staff> staffs){};
 

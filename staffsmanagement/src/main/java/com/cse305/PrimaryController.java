@@ -7,28 +7,26 @@ import java.util.HashMap;
 import com.cse305.Models.DataManager;
 import com.cse305.Models.Manager;
 import com.cse305.Models.Request;
+import com.cse305.Models.Staff;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.TextField;
 
 public class PrimaryController {
     //String iD, String name, String password, String role, ArrayList<Request> listOfRequest
-    public HashMap<String, Manager> ManagerMap = new HashMap<>();
-    public HashMap<String, String> StaffMap = new HashMap<>();
-    public DataManager dataManager = new DataManager();
+
+    public DataManager dataManager = DataManager.getInstance();
     @FXML
     public TextField EmailInput;
     @FXML
     public TextField PasswordInput;
 
     public void initialize() {
-        Manager m1 = new Manager("1", "name1", "pass1", "role1", null);
-        ManagerMap.put(m1.ID, m1);
-        Manager m2 = new Manager("2", "name2", "pass2", "role2", null);
-        ManagerMap.put(m2.ID, m2);
-        Manager m3 = new Manager("3", "name3", "pass3", "role3", null);
-        ManagerMap.put(m3.ID, m3);
+        dataManager.createManagerAccount("id1", "Nguyen Van A", "123");
+        dataManager.createStaffAccount("id2", "Pham Thi B", "123");
+        
     }
 
     @FXML
@@ -39,15 +37,7 @@ public class PrimaryController {
     public void Login() {
         String id = EmailInput.getText();
         String pass = PasswordInput.getText();
-        // if(ManagerMap.get(id) == null) {
-        //     System.out.println("id is incorrect");
-        // } else {
-        //     if(pass.equals(ManagerMap.get(id).Password)) {
-        //         System.out.println("success");
-        //     } else {
-        //         System.out.println("password is incorrect");
-        //     }
-        // }
+
         if(dataManager.login(id, pass)) {
             System.out.println("hen qua duoc roi");
         } else {

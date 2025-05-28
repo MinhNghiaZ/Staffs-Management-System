@@ -25,10 +25,10 @@ public class User {
     public String getRole() {
         return Role;
     }
-    public boolean Login(String id, String password) {
+    public boolean login(String id, String password) {
         return this.ID.equals(id) && this.Password.equals(password);
     }
-    public void Logout() {
+    public void logout() {
         // Implement logout logic if needed
     }
 

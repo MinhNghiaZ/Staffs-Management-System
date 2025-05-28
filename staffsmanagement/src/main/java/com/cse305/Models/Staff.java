@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Staff extends User {
     private ArrayList<Duty> ListOfDuty = new ArrayList<>();
     
-    public Staff(String id, String name, String password, String role, ArrayList<Duty> listOfDuty) {
-        super(id, name, password, role);
+    public Staff(String id, String name, String password, ArrayList<Duty> listOfDuty) {
+        super(id, name, password, "Staff");
         ListOfDuty = listOfDuty;
     }
     
