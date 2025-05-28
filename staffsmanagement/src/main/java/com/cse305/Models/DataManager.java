@@ -95,4 +95,24 @@ public class DataManager {
         }
         return false;
     }
+
+    //Manager function
+
+    //ShowListRequest button for manager
+    public void showListRequest() {
+        Manager currentManager = (Manager)loggedInUser;
+        var listRequest = currentManager.getListOfRequest();
+        for(var request : listRequest) {
+            System.out.println("Request ID: " + request.ID);
+            System.out.println("Staff ID: " + request.StaffID);
+            System.out.println("DutyId ID: " + request.DutyId);
+            System.out.println("Type ID: " + request.Type);
+            System.out.println("Request ID: " + request.isAccepted);
+        }
+    }
+
+    //CreateDuty button for manager
+    public Duty createDuty(String id, String name, Staff s, String day, String shift) {
+        return new Duty(id, name, s, day, shift);
+    }
 }
