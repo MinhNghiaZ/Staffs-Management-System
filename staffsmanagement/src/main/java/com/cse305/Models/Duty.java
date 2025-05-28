@@ -3,7 +3,7 @@ package com.cse305.Models;
 public class Duty {
     String ID;
     String Name;
-    String StaffID;
-    String StartTime;
-    String EndTime;
+    Staff Staff; // The staff member assigned to this duty
+    String DayOfWeek; // "Monday", "Tuesday", etc.
+    String Shift; // "Morning", "Afternoon", "Evening"
 }

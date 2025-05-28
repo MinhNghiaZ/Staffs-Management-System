@@ -2,33 +2,26 @@ package com.cse305.Models;
 
 import java.util.ArrayList;
 
-public class Staff {
-    public String ID;
-    public String Name;
-    public String Password;
-    public String Role;
-    ArrayList<Duty> ListOfDuty = new ArrayList<>();
+public class Staff extends User {
+    private ArrayList<Duty> ListOfDuty = new ArrayList<>();
     
-    public Staff(String iD, String name, String password, String role, ArrayList<Duty> listOfDuty) {
-        ID = iD;
-        Name = name;
-        Password = password;
-        Role = role;
+    public Staff(String id, String name, String password, String role, ArrayList<Duty> listOfDuty) {
+        super(id, name, password, role);
         ListOfDuty = listOfDuty;
     }
     
-    public boolean Login(String id, String password){
-        return this.ID.equals(id) && this.Password.equals(password);
-    };
+    public ArrayList<Duty> getListOfDuty() {
+        return ListOfDuty;
+    }
+
     void ViewSchedule(){
         var sb = new StringBuilder();
         for(var duty : ListOfDuty) {
-            sb.append("Place to work: " + duty.Name).append("\n").append(duty.StartTime + " => " + duty.EndTime);
+            sb.append("Place to work: " + duty.Name).append("\n").append(duty.DayOfWeek + " => " + duty.Shift).append("\n");
         }
         System.out.println(sb);
     };
     void CreateRequest(){};
     void ViewRoutine(){};
     void ViewSalary(){};
-    void Logout(){};
 }
