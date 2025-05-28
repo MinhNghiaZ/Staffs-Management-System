@@ -10,7 +10,7 @@ public class DataManager {
     private static DataManager instance;
 
     ////////////////////////////////////////////////////
-    // IMPORTANT: USE THIS WHEN Calling DataManager  //
+    // IMPORTANT: Use this when calling DataManager  //
     // DO NOT CREATE NEW DataManager OBJECTS        //
     // This is Singleton Pattern                   //
     ////////////////////////////////////////////////
@@ -21,19 +21,8 @@ public class DataManager {
         return instance;
     }
 
-    
-
-
     //TODO: Implement methods to load and save user data from/to a file
 
-    /**
-     * Creates a new Manager account with the given ID, name, and password.
-     * If the ID already exists, it will not create a new account and return false.
-     * @param id
-     * @param name
-     * @param password
-     * @return boolean indicating success or failure of account creation
-     */
     public boolean createManagerAccount(String id, String name, String password) {
         // TODO: encrypt password
         if (checkExist(id)) {
@@ -46,14 +35,6 @@ public class DataManager {
         return true;
     }
 
-    /**
-     * Creates a new Staff account with the given ID, name, and password.
-     * If the ID already exists, it will not create a new account and return false.
-     * @param id
-     * @param name
-     * @param password
-     * @return boolean indicating success or failure of account creation
-     */
     public boolean createStaffAccount(String id, String name, String password) {
         if (checkExist(id)) {
             System.out.println("ID already exists. Please choose a different ID.");
@@ -111,8 +92,41 @@ public class DataManager {
         }
     }
 
-    //CreateDuty button for manager
-    public Duty createDuty(String id, String name, Staff s, String day, String shift) {
-        return new Duty(id, name, s, day, shift);
+    //giveDuty using staff object
+    public boolean giveDuty(String id, String name, Staff s, String day, String shift) {
+        Duty newDuty = new Duty(id, name, s, day, shift);
+        if (s.addDuty(newDuty)) {
+            return true;
+        }
+        System.out.println("Failed to give duty.");
+        return false;
+    }
+    // giveDuty but use String staffId instead of Staff object
+    public boolean giveDuty(String id, String name, String staffId, String day, String shift){
+        Staff staff = (Staff) getUserById(staffId);
+        if (staff == null) {
+            System.out.println("Staff with ID " + staffId + " does not exist.");
+            return false;
+        }
+        return giveDuty(id, name, staff, day, shift);
+    }
+
+    public ArrayList<Staff> getStaffList() {
+        ArrayList<Staff> staffList = new ArrayList<>();
+        for (User user : userList) {
+            if (user.getRole().equals("Staff")) {
+                staffList.add((Staff) user);
+            }
+        }
+        return staffList;
+    }
+
+    public User getUserById(String id) {
+        for (User user : userList) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
     }
 }

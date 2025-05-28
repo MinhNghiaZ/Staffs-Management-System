@@ -32,5 +32,8 @@ public class User {
         // Implement logout logic if needed
     }
 
+    public void resetPassword(String newPassword) {
+        this.Password = newPassword;
+    }
 
 }

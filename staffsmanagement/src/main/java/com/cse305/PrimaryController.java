@@ -82,13 +82,14 @@ public class PrimaryController {
         String dutyShift = DutyShift.getText();
         String dutyDay = DutyDay.getText();
         String userDutyID = UserDutyID.getText();
-        for(var u : dataManager.userList) {
-            if(u.ID.equals(userDutyID)) {
-                dataManager.createDuty(dutyID, dutyName, (Staff)u, dutyDay, dutyShift);
-                System.out.println("Create duty successfuly");
-                return;
-            }
+        
+        if (dataManager.giveDuty(dutyID, dutyName, userDutyID, dutyDay, dutyShift)){
+            System.out.println("Create duty successfuly");
+        }else{
+            System.out.println("Create duty failed");
         }
-        System.out.println("UserID not found");
+        
+                
+        
     }
 }

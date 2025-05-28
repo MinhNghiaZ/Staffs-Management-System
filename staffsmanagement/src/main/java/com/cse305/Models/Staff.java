@@ -14,6 +14,28 @@ public class Staff extends User {
         return ListOfDuty;
     }
 
+    public boolean addDuty(Duty duty) {
+        for (Duty d : ListOfDuty) {
+            if (d.ID.equals(duty.ID)) {
+                System.out.println("Staff already has a duty with this ID.");
+                return false;
+            }
+        }
+
+        ListOfDuty.add(duty);
+        return true;
+    }
+    public boolean removeDuty(String dutyId) {
+        for (Duty d : ListOfDuty) {
+            if (d.ID.equals(dutyId)) {
+                ListOfDuty.remove(d);
+                return true;
+            }
+        }
+        System.out.println("Duty with ID " + dutyId + " not found.");
+        return false;
+    }
+
     void ViewSchedule(){
         var sb = new StringBuilder();
         for(var duty : ListOfDuty) {
