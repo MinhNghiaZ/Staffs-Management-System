@@ -23,12 +23,14 @@ public class Staff extends User {
         }
 
         ListOfDuty.add(duty);
+        System.out.println("Add duty successfully.");
         return true;
     }
     public boolean removeDuty(String dutyId) {
         for (Duty d : ListOfDuty) {
             if (d.ID.equals(dutyId)) {
                 ListOfDuty.remove(d);
+                System.out.println("Remove duty successfully.");
                 return true;
             }
         }
@@ -36,14 +38,24 @@ public class Staff extends User {
         return false;
     }
 
-    void ViewSchedule(){
+    String ViewSchedule(){
         var sb = new StringBuilder();
         for(var duty : ListOfDuty) {
             sb.append("Place to work: " + duty.Name).append("\n").append(duty.DayOfWeek + " => " + duty.Shift).append("\n");
         }
-        System.out.println(sb);
+        return sb.toString();
     };
-    void CreateRequest(){};
+    Request CreateRequest(String id, Staff staff, String dutyId, String type, boolean isAccepted) {
+        Request request = new Request();
+        request.ID = id;
+        request.StaffID = staff.getId();
+        request.DutyId = dutyId;
+        request.Type = type;
+        request.isAccepted = false;
+        return request;
+    };
     void ViewRoutine(){};
-    void ViewSalary(){};
+    String ViewSalary(){
+        return "Total Salary: " + ListOfDuty.size() * 50+" $";
+    };
 }
