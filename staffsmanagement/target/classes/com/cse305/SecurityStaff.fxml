@@ -2,11 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,17 +26,24 @@
                         <AnchorPane layoutX="127.0" layoutY="-77.0" prefHeight="35.0" prefWidth="1100.0" stylesheets="@AdminUi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               
-                              <Label layoutX="42.0" layoutY="13.0" text="Security Guard Management System">
+                              <Label layoutX="53.0" layoutY="14.0" text="Security Guard Management System">
                                  <font>
                                     <Font name="Tahoma" size="14.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="1034.0" layoutY="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="60.0" styleClass="close" stylesheets="@AdminUi.css" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="10.0">
-                                 
-                              </Button>
-                              <Button layoutX="994.0" layoutY="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="40.0" styleClass="minimize" stylesheets="@AdminUi.css">
-                                 
-                              </Button>
+                              <Button layoutX="1047.0" layoutY="4.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="56.0" styleClass="close" stylesheets="@AdminUi.css" text="X" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Button>
+                              <Button layoutX="981.0" layoutY="4.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="49.0" styleClass="minimize" stylesheets="@AdminUi.css" text="_">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Button>
+                              <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/lock.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </children>
@@ -49,20 +52,20 @@
                <left>
                   <AnchorPane prefHeight="555.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="14.0" layoutY="69.0" prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@AdminUi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@AdminUi.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label alignment="CENTER" layoutY="110.0" prefHeight="17.0" prefWidth="211.0" text="Welcome," textFill="WHITE">
+                              <Label alignment="CENTER" layoutY="110.0" prefHeight="17.0" prefWidth="211.0" text=" Welcome" textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="1.0" layoutY="131.0" prefHeight="17.0" prefWidth="211.0" text="Admin" textFill="#00ff4d">
+                              <Label alignment="CENTER" layoutX="1.0" layoutY="131.0" prefHeight="17.0" prefWidth="211.0" text="Security Staff" textFill="#00ff4d">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <Line endX="58.0" layoutX="126.0" layoutY="167.0" startX="-100.0" stroke="WHITE" />
-                              <Button fx:id="btnHome" layoutX="15.0" layoutY="198.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="185.0" stylesheets="@AdminUi.css" text=" Home">
+                              <Line endX="58.0" layoutX="127.0" layoutY="191.0" startX="-100.0" stroke="WHITE" />
+                              <Button layoutX="20.0" layoutY="201.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="187.0" stylesheets="@AdminUi.css" text=" Home">
                                  <styleClass>
                                     <String fx:value="nav-btn" />
                                     <String fx:value="shadow" />
@@ -75,7 +78,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="btnAddSchedule" layoutX="15.0" layoutY="263.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="187.0" stylesheets="@AdminUi.css" text=" Add New Schedule">
+                              <Button layoutX="21.0" layoutY="251.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="175.0" stylesheets="@AdminUi.css" text=" Request Leave">
                                  <styleClass>
                                     <String fx:value="nav-btn" />
                                     <String fx:value="shadow" />
@@ -83,12 +86,12 @@
                                  <graphic>
                                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/plus-symbol-button.png" />
+                                          <Image url="@images/leave.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="btnSalary" layoutX="14.0" layoutY="331.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="186.0" stylesheets="@AdminUi.css" text=" Salary">
+                              <Button layoutX="18.0" layoutY="304.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="179.0" stylesheets="@AdminUi.css" text=" Salary">
                                  <styleClass>
                                     <String fx:value="nav-btn" />
                                     <String fx:value="shadow" />
@@ -101,7 +104,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button layoutX="14.0" layoutY="501.0" mnemonicParsing="false" stylesheets="@AdminUi.css" text=" Log Out">
+                              <Button layoutX="14.0" layoutY="511.0" mnemonicParsing="false" stylesheets="@AdminUi.css" text="Log Out">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -109,20 +112,13 @@
                                     <String fx:value="log-out-btn" />
                                     <String fx:value="shadow" />
                                  </styleClass>
-                                 <graphic>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@images/logout.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
                               </Button>
-                              <ImageView fitHeight="88.0" fitWidth="134.0" layoutX="63.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="79.0" fitWidth="126.0" layoutX="68.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/administrator.png" />
+                                    <Image url="@images/policeman.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="btnAddStaff" layoutX="16.0" layoutY="396.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="186.0" stylesheets="@AdminUi.css" text=" Add New Staff">
+                              <Button layoutX="14.0" layoutY="369.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="190.0" stylesheets="@AdminUi.css" text=" Change Information">
                                  <styleClass>
                                     <String fx:value="nav-btn" />
                                     <String fx:value="shadow" />
@@ -130,11 +126,16 @@
                                  <graphic>
                                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@images/add-group.png" />
+                                          <Image url="@images/info.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
+                              <Label alignment="CENTER" layoutY="160.0" prefHeight="17.0" prefWidth="211.0" text="NAME" textFill="#00ff4d">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>
@@ -143,7 +144,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane id="MainPage" layoutX="60.0" layoutY="110.0" prefHeight="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutX="60.0" layoutY="110.0" prefHeight="555.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="9.0" layoutY="8.0" prefHeight="539.0" prefWidth="867.0" stylesheets="@AdminUi.css">
                                  <styleClass>
@@ -151,71 +152,6 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <AnchorPane prefHeight="158.0" prefWidth="867.0" stylesheets="@AdminUi.css">
-                                       <styleClass>
-                                          <String fx:value="white-bg" />
-                                          <String fx:value="shadow" />
-                                       </styleClass>
-                                       <children>
-                                          <AnchorPane layoutX="14.0" layoutY="8.0" prefHeight="142.0" prefWidth="254.0" styleClass="card" stylesheets="@AdminUi.css">
-                                             <children>
-                                                <Label layoutX="104.0" layoutY="104.0" text="Total Employee" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Tahoma Bold" size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" layoutX="115.0" layoutY="5.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Arial Bold" size="72.0" />
-                                                   </font>
-                                                </Label>
-                                                <ImageView fitHeight="99.0" fitWidth="105.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/group.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane layoutX="306.0" layoutY="8.0" prefHeight="142.0" prefWidth="254.0" styleClass="card" stylesheets="@AdminUi.css">
-                                             <children>
-                                                <Label layoutX="120.0" layoutY="107.0" text="Total Present" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Tahoma Bold" size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" layoutX="118.0" layoutY="8.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Arial Bold" size="72.0" />
-                                                   </font>
-                                                </Label>
-                                                <ImageView fitHeight="99.0" fitWidth="105.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/checked.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane layoutX="598.0" layoutY="9.0" prefHeight="142.0" prefWidth="254.0" styleClass="card" stylesheets="@AdminUi.css">
-                                             <children>
-                                                <Label layoutX="127.0" layoutY="107.0" text="Total Leave" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Tahoma Bold" size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" layoutX="117.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Arial Bold" size="72.0" />
-                                                   </font>
-                                                </Label>
-                                                <ImageView fitHeight="99.0" fitWidth="105.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@images/absence.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                          </AnchorPane>
-                                       </children>
-                                    </AnchorPane>
                                     <AnchorPane fx:id="TablePane" layoutX="1.0" layoutY="200.8" prefHeight="338.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="201.0">
                                        <children>
                                           <GridPane gridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -390,83 +326,20 @@
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
+                                    <Label alignment="CENTER" layoutX="14.0" layoutY="164.0" prefHeight="45.0" prefWidth="369.0" text="Lịch Làm Việc Ngày: ">
+                                       <font>
+                                          <Font name="Arial Bold" size="36.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
-                        <AnchorPane id="AddPage" layoutX="45.0" layoutY="42.0" prefHeight="554.4" prefWidth="887.2" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <AnchorPane layoutX="20.0" layoutY="14.0" prefHeight="526.0" prefWidth="849.0" stylesheets="@AdminUi.css">
-                                 <children>
-                                    <AnchorPane prefHeight="322.0" prefWidth="850.0" stylesheets="@AdminUi.css">
-                                       <styleClass>
-                                          <String fx:value="white-bg" />
-                                          <String fx:value="shadow" />
-                                       </styleClass>
-                                       <children>
-                                          <TableView layoutX="13.0" layoutY="52.0" prefHeight="256.0" prefWidth="824.0">
-                                            <columns>
-                                              <TableColumn prefWidth="96.0" text="Employee ID" />
-                                                <TableColumn prefWidth="305.6000061035156" text="Name" />
-                                                <TableColumn prefWidth="233.59994506835938" text="Password" />
-                                                <TableColumn prefWidth="189.60003662109375" text="Role" />
-                                            </columns>
-                                          </TableView>
-                                          <TextField layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Search" />
-                                          <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="267.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@images/magnifying-glass.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </AnchorPane>
-                                    <Label layoutX="37.0" layoutY="355.0" text="Employee ID:">
-                                       <font>
-                                          <Font name="Tahoma" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField layoutX="146.0" layoutY="352.0" prefHeight="26.0" prefWidth="154.0" />
-                                    <Label layoutX="38.0" layoutY="423.0" text="Name:">
-                                       <font>
-                                          <Font name="Tahoma" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField layoutX="146.0" layoutY="417.0" prefHeight="26.0" prefWidth="154.0" />
-                                    <Label layoutX="39.0" layoutY="481.0" text="Role:">
-                                       <font>
-                                          <Font name="Tahoma" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="351.0" layoutY="394.0">
-                                       <font>
-                                          <Font name="Tahoma" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <ChoiceBox layoutX="146.0" layoutY="477.0" prefHeight="26.0" prefWidth="154.0" />
-                                    <Label layoutX="330.0" layoutY="355.0" text="User Name:">
-                                       <font>
-                                          <Font name="Tahoma" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField layoutX="425.0" layoutY="351.0" prefHeight="26.0" prefWidth="154.0" />
-                                    <Label layoutX="330.0" layoutY="420.0" text="Password:">
-                                       <font>
-                                          <Font name="Tahoma" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField layoutX="425.0" layoutY="417.0" prefHeight="26.0" prefWidth="154.0" />
-                                 </children>
-                                 <styleClass>
-                                    <String fx:value="white-bg" />
-                                    <String fx:value="shadow" />
-                                 </styleClass>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </center>
             </BorderPane>
          </children>
       </AnchorPane>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </StackPane>
