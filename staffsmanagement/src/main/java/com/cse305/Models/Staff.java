@@ -46,12 +46,8 @@ public class Staff extends User {
         return sb.toString();
     };
     Request CreateRequest(String id, Staff staff, String dutyId, String type, boolean isAccepted) {
-        Request request = new Request();
-        request.ID = id;
-        request.StaffID = staff.getId();
-        request.DutyId = dutyId;
-        request.Type = type;
-        request.isAccepted = false;
+        Request request = new Request(id, staff.getId(), dutyId, type, isAccepted);
+        
         return request;
     };
     void ViewRoutine(){};
