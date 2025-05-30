@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Staff extends User {
     private ArrayList<Duty> ListOfDuty = new ArrayList<>();
-    
+    private ArrayList<String> ListOfRequestId = new ArrayList<>();
     public Staff(String id, String name, String password, ArrayList<Duty> listOfDuty) {
         super(id, name, password, "Staff");
         ListOfDuty = listOfDuty;
@@ -47,11 +47,15 @@ public class Staff extends User {
     };
     Request CreateRequest(String id, Staff staff, String dutyId, String type, boolean isAccepted) {
         Request request = new Request(id, staff.getId(), dutyId, type, isAccepted);
-        
+        ListOfRequestId.add(id);
         return request;
     };
     void ViewRoutine(){};
     String ViewSalary(){
         return "Total Salary: " + ListOfDuty.size() * 50+" $";
     };
+
+    public ArrayList<String> getListOfRequestId() {
+        return ListOfRequestId;
+    }
 }

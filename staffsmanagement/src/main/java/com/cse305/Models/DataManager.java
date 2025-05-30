@@ -176,7 +176,56 @@ public class DataManager {
         return currentStaff.ViewSalary();
     }
 
+    // Display requests for staff (see if their requests are accepted or not)
+    public String ViewRequestStaff() {
+        Staff currentStaff = (Staff) loggedInUser;
+        StringBuilder sb = new StringBuilder();
+        ArrayList<String> requestIds = currentStaff.getListOfRequestId();
+        for (Request request : requestList){
+            if (requestIds.contains(request.ID)){
+                sb.append("Request ID: ").append(request.ID)
+                  .append(", Staff ID: ").append(request.StaffID)
+                  .append(", Duty ID: ").append(request.DutyId)
+                  .append(", Type: ").append(request.Type)
+                  .append(", Accepted: ").append(request.isAccepted)
+                  .append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    // Display all requests for manager (see all requests made by staff)
+    public String ViewAllRequestManager() {
+        StringBuilder sb = new StringBuilder();
+        for (Request request : requestList) {
+            sb.append("Request ID: ").append(request.ID)
+              .append(", Staff ID: ").append(request.StaffID)
+              .append(", Duty ID: ").append(request.DutyId)
+              .append(", Type: ").append(request.Type)
+              .append(", Accepted: ").append(request.isAccepted)
+              .append("\n");
+        }
+        return sb.toString();
+    }
     //funtion to update data when request was process;
     //In MANAGER SCREEN IF ACCEPT button was clicked, then update the request status to ACCEPTED and add the duty to staff
     // IF REJECT button was clicked, then update the request status to REJECTED and remain the duty for staff
+
+    public void processRequest(String requestId, boolean isAccepted){
+        for (Request request : requestList){
+            if (request.ID.equals(requestId)){
+                if (isAccepted){
+                    request.accept();
+                    Staff staff = (Staff) getUserById(request.StaffID);
+                    if (staff != null){
+                        staff.removeDuty(request.DutyId);
+                    }else{
+                        System.out.println("Staff with ID " + request.StaffID + " does not exist.");
+                    }
+                }else{
+                    request.reject();
+                }
+            }
+        }
+    }
 }
