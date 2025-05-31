@@ -88,3 +88,26 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
+.create-btn {
+    -fx-background-color: #27ae60; /* Green background */
+    -fx-text-fill: white; /* White text */
+    -fx-padding: 10px 20px; /* Padding around the button */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-cursor: hand; /* Hand cursor on hover */
+}
+.create-btn:hover {
+    -fx-background-color: #2ecc71; /* Lighter green on hover */
+    -fx-text-fill: white; /* White text on hover */
+}
+.reset-btn {
+    -fx-background-color: #e74c3c; /* Red background */
+    -fx-text-fill: white; /* White text */
+    -fx-padding: 10px 20px; /* Padding around the button */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-cursor: hand; /* Hand cursor on hover */
+}
+.reset-btn:hover {
+    -fx-background-color: #c0392b; /* Darker red on hover */
+    -fx-text-fill: white; /* White text on hover */
+}
+
