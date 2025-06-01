@@ -3,56 +3,71 @@ package com.cse305.Models;
 import java.util.ArrayList;
 
 public class Staff extends User {
-    private ArrayList<Duty> ListOfDuty = new ArrayList<>();
+    private ArrayList<String> ListOfDutyId = new ArrayList<>();
     private ArrayList<String> ListOfRequestId = new ArrayList<>();
-    public Staff(String id, String name, String password, ArrayList<Duty> listOfDuty) {
+
+    public Staff(String id, String name, String password, ArrayList<String> listOfDuty) {
         super(id, name, password, "Staff");
-        ListOfDuty = listOfDuty;
+        ListOfDutyId = listOfDuty;
     }
-    
-    public ArrayList<Duty> getListOfDuty() {
-        return ListOfDuty;
+
+    public ArrayList<String> getListOfDutyId() {
+        return ListOfDutyId;
     }
 
     public boolean addDuty(Duty duty) {
-        for (Duty d : ListOfDuty) {
-            if (d.ID.equals(duty.ID)) {
-                System.out.println("Staff already has a duty with this ID.");
-                return false;
-            }
+        if (ListOfDutyId.contains(duty.ID)) {
+            System.out.println("Duty with ID " + duty.ID + " already exists.");
+            return false;
         }
-
-        ListOfDuty.add(duty);
-        System.out.println("Add duty successfully.");
+        ListOfDutyId.add(duty.ID);
         return true;
     }
+
     public boolean removeDuty(String dutyId) {
-        for (Duty d : ListOfDuty) {
-            if (d.ID.equals(dutyId)) {
-                ListOfDuty.remove(d);
-                System.out.println("Remove duty successfully.");
-                return true;
-            }
-        }
-        System.out.println("Duty with ID " + dutyId + " not found.");
-        return false;
+        return ListOfDutyId.remove(dutyId);
     }
 
-    String ViewSchedule(){
+    String ViewSchedule(ArrayList<Duty> ListOfDuty) {
         var sb = new StringBuilder();
-        for(var duty : ListOfDuty) {
-            sb.append("Place to work: " + duty.Place).append("\n").append(duty.DayOfWeek + " => " + duty.Shift).append("\n");
+        for (var duty : ListOfDuty) {
+            if (ListOfDutyId.contains(duty.ID)) {
+                sb.append("Place to work: " + duty.Place).append("\n").append(duty.DayOfWeek + " => " + duty.Shift)
+                        .append("\n");
+            }
+
         }
         return sb.toString();
     };
-    Request CreateRequest(String id, Staff staff, String dutyId, String type, boolean isAccepted) {
-        Request request = new Request(id, staff.getId(), dutyId, type, isAccepted);
-        ListOfRequestId.add(id);
-        return request;
+
+    public boolean addRequest(Request request){
+        if (ListOfRequestId.contains(request.ID)) {
+            System.out.println("Request with ID " + request.ID + " already exists.");
+            return false;
+        }
+        ListOfRequestId.add(request.ID);
+        return true;
+    }
+
+    // Overloading addRequest to accept request ID directly
+    public boolean addRequest(String requestId) {
+        if (ListOfRequestId.contains(requestId)) {
+            System.out.println("Request with ID " + requestId + " already exists.");
+            return false;
+        }
+        ListOfRequestId.add(requestId);
+        return true;
+    }
+
+    public boolean removeRequest(String requestId) {
+        return ListOfRequestId.remove(requestId);
+    }
+
+    void ViewRoutine() {
     };
-    void ViewRoutine(){};
-    String ViewSalary(){
-        return "Total Salary: " + ListOfDuty.size() * 50+" $";
+
+    String ViewSalary() {
+        return "Total Salary: " + ListOfDutyId.size() * 50 + " $";
     };
 
     public ArrayList<String> getListOfRequestId() {
