@@ -13,12 +13,27 @@ public class Manager extends User {
     public ArrayList<Request> getListOfRequest() {
         return ListOfRequest;
     }
-
+    // create duty
     ArrayList<Duty> CreateRoutine(){
         return null;
     };
 
-    void ViewRoutineOfAllStaff(ArrayList<Staff> staffs){};
-    void ViewSalaryOfAllStaff(ArrayList<Staff> staffs){};
-
+    String ViewRoutineOfAllStaff(ArrayList<Staff> staffs){
+        String s ="";
+        for(var staff : staffs) {
+            s+= "Staff ID: " + staff.getId() + ", Name: " + staff.getName() + "\n" + staff.ViewSchedule();
+        }
+        return s;
+    };
+    String ViewSalaryOfAllStaff(ArrayList<Staff> staffs){
+        String s = "";
+        for(var staff : staffs) {
+            s += "Staff ID: " + staff.getId() + ", Name: " + staff.getName() + "\n" + staff.ViewSalary();
+        }
+        return s;
+    };
+    //////////////////////////////////////
+    /// Staff Id: 1, Name: Nguyen Van A//
+    /// Total Salary: 200 $            //
+    /// /////////////////////////////////
 }

@@ -87,9 +87,9 @@ public class PrimaryController {
             System.out.println("Create duty successfuly");
         }else{
             System.out.println("Create duty failed");
-        }
-        
-                
-        
+        }             
     }
+
+    //manager
+    
 }

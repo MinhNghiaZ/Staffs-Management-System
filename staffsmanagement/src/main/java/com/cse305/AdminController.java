@@ -249,5 +249,6 @@ public class AdminController implements Initializable {
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(false);
         SalaryPannel.setVisible(true);
+
     }
 }

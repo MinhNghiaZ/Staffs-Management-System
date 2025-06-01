@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DataManager {
 
     public ArrayList<User> userList = new ArrayList<>();
+    public ArrayList<Request> requestList = new ArrayList<>();
     public User loggedInUser;
 
     private static DataManager instance;
@@ -80,6 +81,8 @@ public class DataManager {
     //Manager function
 
     //ShowListRequest button for manager
+    //In here if the screen of all request is show, manager can click in ACCEPT or REJECT button
+    //After that, update the request status in the list
     public void showListRequest() {
         Manager currentManager = (Manager)loggedInUser;
         var listRequest = currentManager.getListOfRequest();
@@ -128,5 +131,101 @@ public class DataManager {
             }
         }
         return null;
+    }
+
+    //button to show routine of all staff in manager screen
+    public String ViewRoutineOfAllStaff() {
+        Manager currentManager = (Manager)loggedInUser;
+        ArrayList<Staff> staffs = getStaffList();
+        return currentManager.ViewRoutineOfAllStaff(staffs);
+    }
+
+    //button to show salary of all staff in manager screen
+    public String ViewSalaryOfAllStaff() {
+        Manager currentManager = (Manager)loggedInUser;
+        ArrayList<Staff> staffs = getStaffList();
+        return currentManager.ViewSalaryOfAllStaff(staffs);
+    }
+
+
+    //Staff function
+
+    //button to view schedule as a staff
+    public String ViewSchedule() {
+        Staff currentStaff = (Staff) loggedInUser;
+        return currentStaff.ViewSchedule();
+    }
+
+    //button to create a request as a staff
+    public String CreateRequest(String id, String dutyId, String type) {
+        Staff currentStaff = (Staff) loggedInUser;
+        Request request = currentStaff.CreateRequest(id, currentStaff, dutyId, type, false);
+        requestList.add(request);
+        return "Request created successfully.";
+    }
+
+    //button to show routine as a staff SCHEDULE AS ROUTINE
+    public String ViewRoutine() {
+        Staff currentStaff = (Staff) loggedInUser;
+        return currentStaff.ViewSchedule();
+    }
+
+    //button to view salary as a staff
+    public String ViewSalary() {
+        Staff currentStaff = (Staff) loggedInUser;
+        return currentStaff.ViewSalary();
+    }
+
+    // Display requests for staff (see if their requests are accepted or not)
+    public String ViewRequestStaff() {
+        Staff currentStaff = (Staff) loggedInUser;
+        StringBuilder sb = new StringBuilder();
+        ArrayList<String> requestIds = currentStaff.getListOfRequestId();
+        for (Request request : requestList){
+            if (requestIds.contains(request.ID)){
+                sb.append("Request ID: ").append(request.ID)
+                  .append(", Staff ID: ").append(request.StaffID)
+                  .append(", Duty ID: ").append(request.DutyId)
+                  .append(", Type: ").append(request.Type)
+                  .append(", Accepted: ").append(request.isAccepted)
+                  .append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    // Display all requests for manager (see all requests made by staff)
+    public String ViewAllRequestManager() {
+        StringBuilder sb = new StringBuilder();
+        for (Request request : requestList) {
+            sb.append("Request ID: ").append(request.ID)
+              .append(", Staff ID: ").append(request.StaffID)
+              .append(", Duty ID: ").append(request.DutyId)
+              .append(", Type: ").append(request.Type)
+              .append(", Accepted: ").append(request.isAccepted)
+              .append("\n");
+        }
+        return sb.toString();
+    }
+    //funtion to update data when request was process;
+    //In MANAGER SCREEN IF ACCEPT button was clicked, then update the request status to ACCEPTED and add the duty to staff
+    // IF REJECT button was clicked, then update the request status to REJECTED and remain the duty for staff
+
+    public void processRequest(String requestId, boolean isAccepted){
+        for (Request request : requestList){
+            if (request.ID.equals(requestId)){
+                if (isAccepted){
+                    request.accept();
+                    Staff staff = (Staff) getUserById(request.StaffID);
+                    if (staff != null){
+                        staff.removeDuty(request.DutyId);
+                    }else{
+                        System.out.println("Staff with ID " + request.StaffID + " does not exist.");
+                    }
+                }else{
+                    request.reject();
+                }
+            }
+        }
     }
 }
