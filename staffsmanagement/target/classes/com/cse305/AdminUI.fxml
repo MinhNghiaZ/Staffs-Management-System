@@ -154,9 +154,9 @@
                   </AnchorPane>
                </left>
                <center>
-                  <AnchorPane prefHeight="200.0" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="537.0" prefWidth="859.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane id="MainPage" fx:id="HomePanel" layoutX="60.0" layoutY="110.0" prefHeight="554.4" prefWidth="887.2" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane id="MainPage" fx:id="HomePanel" layoutX="60.0" layoutY="110.0" prefHeight="554.4" prefWidth="887.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="9.0" layoutY="8.0" prefHeight="539.0" prefWidth="867.0" stylesheets="@AdminUi.css">
                                  <styleClass>
@@ -411,7 +411,7 @@
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
-                        <AnchorPane id="AddPage" fx:id="AddStaffPanel" layoutX="13.0" layoutY="7.0" prefHeight="554.4" prefWidth="887.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane id="AddPage" fx:id="AddStaffPanel" layoutX="13.0" layoutY="7.0" prefHeight="554.4" prefWidth="887.2" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="538.0" prefWidth="870.0" stylesheets="@AdminUi.css">
                                  <children>
@@ -647,6 +647,31 @@
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane id="AddPage" fx:id="SalaryPannel" layoutX="20.0" layoutY="20.0" prefHeight="554.4" prefWidth="887.2" visible="false">
+                           <children>
+                              <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="522.0" prefWidth="863.0" stylesheets="@AdminUi.css">
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <children>
+                                    <TableView prefHeight="522.4" prefWidth="863.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columns>
+                                          <TableColumn fx:id="employeeNameCol" prefWidth="75.0" text="Employee Name" />
+                                          <TableColumn fx:id="employeeIdCol" prefWidth="75.0" text="Employee Id" />
+                                          <TableColumn fx:id="totalShiftCol" prefWidth="75.0" text="Total Shifts" />
+                                          <TableColumn fx:id="dayAbsentCol" prefWidth="75.0" text="Days Absent" />
+                                          <TableColumn fx:id="rateCol" prefWidth="75.0" text="Rate per Shift" />
+                                          <TableColumn fx:id="salaryCol" prefWidth="75.0" text="Total Salary" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>

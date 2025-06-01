@@ -51,6 +51,9 @@ public class AdminController implements Initializable {
     @FXML
     private AnchorPane StaffRequestPanel;
 
+    @FXML
+    private AnchorPane SalaryPannel;
+
     // TableViews for different panels
     @FXML
     private TableView<User> UserTable;
@@ -127,6 +130,8 @@ public class AdminController implements Initializable {
         btnAddStaff.setOnAction(e -> showAddStaffPanel());
         btnAddSchedule.setOnAction(e -> showAddSchedulePanel());
         btnStaffRequest.setOnAction(e -> showStaffRequestPanel());
+        btnSalary.setOnAction(e->showSalaryPannel());
+
 
         // Add event handlers for action buttons
         btnLogOut.setOnAction(e -> handleLogOut());
@@ -211,6 +216,7 @@ public class AdminController implements Initializable {
         AddStaffPanel.setVisible(false);
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(false);
+        SalaryPannel.setVisible(false);
     }
 
     private void showAddStaffPanel() {
@@ -218,6 +224,7 @@ public class AdminController implements Initializable {
         AddStaffPanel.setVisible(true);
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(false);
+        SalaryPannel.setVisible(false);
     }
 
     private void showAddSchedulePanel() {
@@ -225,6 +232,7 @@ public class AdminController implements Initializable {
         AddStaffPanel.setVisible(false);
         AddSchedulePanel.setVisible(true);
         StaffRequestPanel.setVisible(false);
+        SalaryPannel.setVisible(false);
     }
 
     private void showStaffRequestPanel() {
@@ -232,5 +240,14 @@ public class AdminController implements Initializable {
         AddStaffPanel.setVisible(false);
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(true);
+        SalaryPannel.setVisible(false);
+    }
+
+    private void showSalaryPannel(){
+        HomePanel.setVisible(false);
+        AddStaffPanel.setVisible(false);
+        AddSchedulePanel.setVisible(false);
+        StaffRequestPanel.setVisible(false);
+        SalaryPannel.setVisible(true);
     }
 }
