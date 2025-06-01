@@ -1,5 +1,6 @@
 package com.cse305;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -154,6 +155,11 @@ public class AdminController implements Initializable {
     // Action button handlers
     private void handleLogOut() {
         // TODO: Implement logout functionality
+        try {
+            App.setRoot("Login");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Logout button clicked");
     }
 

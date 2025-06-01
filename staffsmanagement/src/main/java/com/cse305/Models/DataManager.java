@@ -2,6 +2,8 @@ package com.cse305.Models;
 
 import java.util.ArrayList;
 
+import javafx.scene.Scene;
+
 public class DataManager {
 
     public ArrayList<User> userList = new ArrayList<>(); // List of all users (managers and staff)
