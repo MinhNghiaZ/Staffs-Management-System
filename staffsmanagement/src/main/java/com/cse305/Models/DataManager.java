@@ -1,8 +1,17 @@
 package com.cse305.Models;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 
 public class DataManager {
 
@@ -10,6 +19,7 @@ public class DataManager {
     public ArrayList<Duty> dutyList = new ArrayList<>(); // List of all duties assigned to staff
     public ArrayList<Request> requestList = new ArrayList<>(); // List of all requests made by staff
     public User loggedInUser;
+    private final static String FILE_PATH = "data.lmao"; // Path to the file where data will be saved
 
     private static DataManager instance;
 
@@ -26,6 +36,45 @@ public class DataManager {
     }
 
     // TODO: Implement methods to load and save user data from/to a file
+    public void saveData(){
+        try{
+            FileOutputStream fos = new FileOutputStream(FILE_PATH);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            DataContainer container = new DataContainer(userList, dutyList, requestList);
+            oos.writeObject(container);
+            oos.close();
+            System.out.println("Data saved successfully");
+        }catch (IOException e){
+            System.out.println("Error saving: "+e.getMessage());
+        }
+    }
+    public void loadData() {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            System.out.println("File " + FILE_PATH + " not found. Starting with empty data.");
+            return;
+        }
+        try{
+            FileInputStream fis = new FileInputStream(FILE_PATH);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            DataContainer container = (DataContainer) ois.readObject();
+
+            userList.clear();
+            dutyList.clear();
+            requestList.clear();
+
+            userList.addAll(container.userList);
+            dutyList.addAll(container.dutyList);
+            requestList.addAll(container.requestList);
+            ois.close();
+            System.out.println("Data loaded successfully");
+
+        }catch (ClassNotFoundException e) {
+            System.out.println("Error loading: " + e.getMessage());
+        }catch (IOException e) {
+            System.out.println("Error loading: " + e.getMessage());
+        }
+    }
 
     public boolean createManagerAccount(String id, String name, String password) {
         // TODO: encrypt password
@@ -252,6 +301,19 @@ public class DataManager {
                     request.reject();
                 }
             }
+        }
+    }
+
+
+    // DataContainer class to hold all data for serialization
+    public static class DataContainer implements Serializable{
+        public ArrayList<User> userList;
+        public ArrayList<Duty> dutyList;
+        public ArrayList<Request> requestList;
+        public DataContainer(ArrayList<User> userList, ArrayList<Duty> dutyList, ArrayList<Request> requestList) {
+            this.userList = userList;
+            this.dutyList = dutyList;
+            this.requestList = requestList;
         }
     }
 }
