@@ -41,7 +41,7 @@ public class Staff extends User {
     String ViewSchedule(){
         var sb = new StringBuilder();
         for(var duty : ListOfDuty) {
-            sb.append("Place to work: " + duty.Name).append("\n").append(duty.DayOfWeek + " => " + duty.Shift).append("\n");
+            sb.append("Place to work: " + duty.Place).append("\n").append(duty.DayOfWeek + " => " + duty.Shift).append("\n");
         }
         return sb.toString();
     };
