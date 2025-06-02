@@ -589,7 +589,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="RequestTable" layoutX="13.0" layoutY="44.0" prefHeight="344.0" prefWidth="824.0">
+                                          <TableView fx:id="RequestTable" layoutX="-1.0" layoutY="44.0" prefHeight="344.0">
                                              <columns>
                                                 <TableColumn fx:id="colId1" prefWidth="96.0" text="Request ID" />
                                                 <TableColumn fx:id="colName1" prefWidth="170.4000015258789" text="Staff ID" />
