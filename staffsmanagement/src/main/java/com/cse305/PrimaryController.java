@@ -41,18 +41,31 @@ public class PrimaryController {
         dataManager.createStaffAccount("id2", "Pham Thi B", "123");
     }
 
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
-
-    //LOGIN
+    //LOGIN DONE LOGIN
     public void Login() {
         String id = EmailInput.getText();
         String pass = PasswordInput.getText();
-
+        if(dataManager.login(id, pass)) {
+            for(var pp : dataManager.userList) {
+                if(pp.getId().equals(id)) {
+                    if(pp.getRole().equals("Manager")) {
+                        try {
+                            App.setRoot("AdminUI");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if(pp.getRole().equals("Staff")) {
+                        try {
+                            App.setRoot("SecurityStaff");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
         dataManager.login(id, pass);
-    }
+    }   
 
     //CREATE USER
     //String id, String name, String password these field get from frame

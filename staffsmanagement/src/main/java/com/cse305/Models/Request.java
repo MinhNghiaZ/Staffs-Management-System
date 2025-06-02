@@ -1,6 +1,8 @@
 package com.cse305.Models;
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable{
     public String ID;
     public String StaffID;
     public String DutyId;

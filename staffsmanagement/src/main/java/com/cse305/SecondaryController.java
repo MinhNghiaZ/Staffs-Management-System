@@ -9,4 +9,13 @@ public class SecondaryController {
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
+
+    //DONE LOGOUT
+    public void Logout() {
+        try {
+            App.setRoot("Login");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

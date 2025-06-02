@@ -1,6 +1,8 @@
 package com.cse305.Models;
 
-public class Duty {
+import java.io.Serializable;
+
+public class Duty implements Serializable {
     String ID;
     String Place;
     String StaffID; // The staff member assigned to this duty
