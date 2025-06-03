@@ -35,7 +35,6 @@ public class DataManager {
         return instance;
     }
 
-    // TODO: Implement methods to load and save user data from/to a file
     public void saveData(){
         try{
             FileOutputStream fos = new FileOutputStream(FILE_PATH);
@@ -77,7 +76,8 @@ public class DataManager {
     }
 
     public boolean createManagerAccount(String id, String name, String password) {
-        // TODO: encrypt password
+        // encrypt password before storing
+        password = AES.encrypt(password);
         if (checkExist(id)) {
             System.out.println("ID already exists. Please choose a different ID.");
             return false;
@@ -89,6 +89,8 @@ public class DataManager {
     }
 
     public boolean createStaffAccount(String id, String name, String password) {
+        // encrypt password before storing
+        password = AES.encrypt(password);
         if (checkExist(id)) {
             System.out.println("ID already exists. Please choose a different ID.");
             return false;
@@ -100,8 +102,9 @@ public class DataManager {
     }
 
     public boolean login(String id, String password) {
+        // encrypt password before checking
+        password = AES.encrypt(password);
 
-        // TODO: encrypt password before checking
         if (checkExist(id) == false) {
             System.out.println("ID does not exist. Please register first.");
             return false;
