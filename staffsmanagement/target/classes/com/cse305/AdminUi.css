@@ -94,6 +94,7 @@
     -fx-padding: 10px 20px; /* Padding around the button */
     -fx-border-radius: 5px; /* Rounded corners */
     -fx-cursor: hand; /* Hand cursor on hover */
+    -fx-font-weight: bold; /* Bold text */
 }
 .create-btn:hover {
     -fx-background-color: #2ecc71; /* Lighter green on hover */
