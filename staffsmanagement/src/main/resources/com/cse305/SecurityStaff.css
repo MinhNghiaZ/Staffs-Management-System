@@ -1,0 +1,12 @@
+.request-btn {
+    -fx-background-color: #3498db; /* Blue background */
+    -fx-text-fill: white; /* White text */
+    -fx-padding: 10px 20px; /* Padding around the button */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-cursor: hand; /* Hand cursor on hover */
+    -fx-font-weight: bold; /* Bold text */
+}
+.request-btn:hover {
+    -fx-background-color: #2980b9; /* Darker blue on hover */
+    -fx-text-fill: white; /* White text on hover */
+}
