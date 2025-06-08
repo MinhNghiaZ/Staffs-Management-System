@@ -166,7 +166,7 @@ public class SecurityStaffController implements Initializable {
     public void loadDutyToLabels(){
         ArrayList<Duty> staffDuty = dataManager.getDutyOfLoggedInStaff();
         System.out.println("Loading duty for staff: " + staffDuty.size() + " duties found.");
-        // Clear all labels if no duty found
+
         clearLabelsText();
 
         for (Duty duty : staffDuty){
