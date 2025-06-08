@@ -167,6 +167,13 @@ public class DataManager {
         String dutyID = UUID.randomUUID().toString();
         Duty newDuty = new Duty(dutyID, name, staffId, day, shift);
         Staff s = (Staff) getUserById(staffId);
+        
+        for (Duty duty : dutyList){
+            if (duty.DayOfWeek.equals(newDuty.DayOfWeek) && duty.Shift.equals(newDuty.Shift)){
+                System.out.println("ERROR: This shift already has a duty.");
+                return false;
+            }
+        }
 
         dutyList.add(newDuty);
         saveData();
