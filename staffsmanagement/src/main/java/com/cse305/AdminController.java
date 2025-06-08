@@ -11,9 +11,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
+import com.cse305.Models.DataManager;
 import com.cse305.Models.User;
 
 public class AdminController implements Initializable {
+    public DataManager dataManager = DataManager.getInstance();
 
     @FXML
     private Button btnHome;
@@ -97,11 +100,15 @@ public class AdminController implements Initializable {
 
     @FXML
     private TextField txtCreateName;
+    @FXML
+    private TextField txtCreatePassword;
 
     @FXML
     private ChoiceBox<String> optionCreateRole;
 
     // ChoiceBox fields for Add Schedule
+    @FXML
+    private TextField scheEmID;
     @FXML
     private ChoiceBox<String> optionSelectDay;
 
@@ -174,8 +181,14 @@ public class AdminController implements Initializable {
     }
 
     // Add Staff panel handlers
+    //DONE
     private void handleCreateAccount() {
         // TODO: Implement create account functionality
+        if(optionCreateRole.getValue().equals("Security Guard")) {
+            dataManager.createStaffAccount(txtCreateEmployeeId.getText(), txtCreateName.getText(), txtCreatePassword.getText());
+        } else {
+            dataManager.createManagerAccount(txtCreateEmployeeId.getText(), txtCreateName.getText(), txtCreatePassword.getText());
+        }
         System.out.println("Create Account button clicked");
     }
 
@@ -187,6 +200,12 @@ public class AdminController implements Initializable {
     // Add Schedule panel handler
     private void handleAssignSchedule() {
         // TODO: Implement assign schedule functionality
+        String place = optionSelectWorkingPlace.getValue();
+        String staffID = scheEmID.getText();
+        String day = optionSelectDay.getValue();
+        String shift = optionSelectTime.getValue();
+        dataManager.giveDuty(place, staffID, day, shift);
+
         System.out.println("Assign Schedule button clicked");
     }
 

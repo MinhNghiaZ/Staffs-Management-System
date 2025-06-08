@@ -6,9 +6,9 @@ public class Staff extends User {
     private ArrayList<String> ListOfDutyId = new ArrayList<>();
     private ArrayList<String> ListOfRequestId = new ArrayList<>();
 
-    public Staff(String id, String name, String password, ArrayList<String> listOfDuty) {
+    public Staff(String id, String name, String password) {
         super(id, name, password, "Staff");
-        ListOfDutyId = listOfDuty;
+        //ListOfDutyId = (listOfDuty != null) ? listOfDuty : new ArrayList<>();   
     }
 
     public ArrayList<String> getListOfDutyId() {

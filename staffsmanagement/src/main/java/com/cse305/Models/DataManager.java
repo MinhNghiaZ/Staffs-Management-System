@@ -9,6 +9,7 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart.Data;
@@ -85,6 +86,9 @@ public class DataManager {
         Manager newManager = new Manager(id, name, password);
         userList.add(newManager);
         System.out.println("Manager account created successfully.");
+
+        //save data
+        saveData();
         return true;
     }
 
@@ -95,9 +99,13 @@ public class DataManager {
             System.out.println("ID already exists. Please choose a different ID.");
             return false;
         }
-        Staff newStaff = new Staff(id, name, password, null);
+        //ArrayList<String> list = new ArrayList<>();
+        Staff newStaff = new Staff(id, name, password);
         userList.add(newStaff);
         System.out.println("Staff account created successfully.");
+
+        //save data
+        saveData();
         return true;
     }
 
@@ -154,10 +162,14 @@ public class DataManager {
     }
 
     // giveDuty using staff object
-    public boolean giveDuty(String id, String name, String staffId, String day, String shift) {
-        Duty newDuty = new Duty(id, name, staffId, day, shift);
+    public boolean giveDuty(String name, String staffId, String day, String shift) {
+        //Duty newDuty = new Duty(id, name, staffId, day, shift);
+        String dutyID = UUID.randomUUID().toString();
+        Duty newDuty = new Duty(dutyID, name, staffId, day, shift);
         Staff s = (Staff) getUserById(staffId);
 
+        dutyList.add(newDuty);
+        saveData();
         return s.addDuty(newDuty);
     }
 
