@@ -175,9 +175,14 @@ public class DataManager {
             }
         }
 
-        dutyList.add(newDuty);
-        saveData();
-        return s.addDuty(newDuty);
+        if (s.addDuty(newDuty)){
+            dutyList.add(newDuty);
+            saveData();
+            return true;
+        }
+        
+        return false;
+        
     }
 
     public ArrayList<Staff> getStaffList() {
@@ -226,6 +231,24 @@ public class DataManager {
     public String ViewSchedule() {
         Staff currentStaff = (Staff) loggedInUser;
         return currentStaff.ViewSchedule(dutyList);
+    }
+
+    // Get the list of duties assigned to the logged-in staff
+    public ArrayList<Duty> getDutyOfLoggedInStaff(){
+        if (!loggedInUser.getRole().equals("Staff")) {
+            System.out.println("You are not Staff, Cannot view your own duty.");
+            return new ArrayList<>();
+        }
+
+        Staff currentStaff = (Staff) loggedInUser;
+        ArrayList<Duty> staffDuties = new ArrayList<>();
+        ArrayList<String> staffDutiesId = currentStaff.getListOfDutyId();
+        for (Duty duty : dutyList) {
+            if (staffDutiesId.contains(duty.ID)) {
+                staffDuties.add(duty);
+            }
+        }
+        return staffDuties;
     }
 
     // button to create a request as a staff
