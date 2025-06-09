@@ -298,10 +298,26 @@ public class SecurityStaffController implements Initializable {
     }
 
     private void updateHomeStatistics() {
+        Staff s = (Staff)dataManager.loggedInUser;
+        int shift = s.getListOfDutyId().size();
+        int request = 0;
+        int leave = 0;
+        for(var re : dataManager.requestList) {
+            if(re.isAccepted == true) {
+                leave++;
+            }
+            if(re.StaffID.equals(s.ID)) {
+                request++;
+            }
+        }
         // TODO: Fetch actual data from database/service
-        labelTotalShift.setText("8");
-        labelTotalTakeLeave.setText("2");
-        labelTotalRequest.setText("5");
+        // labelTotalShift.setText("8");
+        // labelTotalTakeLeave.setText("2");
+        // labelTotalRequest.setText("5");
+
+        labelTotalShift.setText(String.valueOf(shift));
+        labelTotalTakeLeave.setText(String.valueOf(leave));
+        labelTotalRequest.setText(String.valueOf(request));
     }
 
     // load salary of staff

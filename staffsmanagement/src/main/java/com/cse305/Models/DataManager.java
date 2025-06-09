@@ -166,6 +166,12 @@ public class DataManager {
         //Duty newDuty = new Duty(id, name, staffId, day, shift);
         String dutyID = UUID.randomUUID().toString();
         Duty newDuty = new Duty(dutyID, name, staffId, day, shift);
+        for(var u : userList) {
+            if(u.ID.equals(staffId) && u.Role.equals("Manager")) {
+                System.out.println("Cannot assisgn duty for manager");
+                return false;
+            }
+        }
         Staff s = (Staff) getUserById(staffId);
         
         for (Duty duty : dutyList){

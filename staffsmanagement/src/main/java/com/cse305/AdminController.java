@@ -216,6 +216,8 @@ public class AdminController implements Initializable {
 
     @FXML
     private TableColumn<Staff, String> totalSalaryCol;
+
+    public boolean flag = false;
     
 
     @Override
@@ -255,6 +257,8 @@ public class AdminController implements Initializable {
         SetUpSalaryTable();
         LoadSalaryTable();
 
+        //tét check if the PANEL load fully
+        flag = true;
     }
 
     // Action button handlers
@@ -342,6 +346,10 @@ public class AdminController implements Initializable {
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(false);
         SalaryPannel.setVisible(false);
+
+        if(flag) {
+            LoadDutyOfStaff();
+        }
     }
 
     private void showAddStaffPanel() {
@@ -434,6 +442,7 @@ public class AdminController implements Initializable {
         staffIdCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().ID));
         totalShiftCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getListOfDutyId().size()));
         //need some change in salary and absent calculation 
+        //number of absent is the number of request that have the isAccepted is TRUE
         dayAbsentCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getListOfRequestId().size()));
         rateCol.setCellValueFactory(cellData -> new SimpleStringProperty("50$"));
         totalSalaryCol.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue().getListOfDutyId().size() * 50) + "$"));
