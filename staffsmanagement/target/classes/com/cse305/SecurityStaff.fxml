@@ -410,7 +410,7 @@
                                                       <Font name="Tahoma Bold" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="TotalShift" alignment="CENTER" layoutX="124.0" layoutY="26.0" prefHeight="142.4" prefWidth="852.0" text="100" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label fx:id="TotalShift" alignment="CENTER" layoutX="124.0" layoutY="26.0" prefHeight="142.4" prefWidth="852.0" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font name="Arial Bold" size="72.0" />
                                                    </font>
@@ -438,7 +438,7 @@
                                                       <Font name="Tahoma Bold" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="StaffSalary" alignment="CENTER" layoutX="51.0" layoutY="31.0" prefHeight="138.0" prefWidth="660.0" text="5,000,000$" textFill="WHITE" AnchorPane.bottomAnchor="29.799999999999997" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="31.0">
+                                                <Label fx:id="StaffSalary" alignment="CENTER" layoutX="51.0" layoutY="31.0" prefHeight="138.0" prefWidth="660.0"  textFill="WHITE" AnchorPane.bottomAnchor="29.799999999999997" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="31.0">
                                                    <font>
                                                       <Font name="Arial Bold" size="72.0" />
                                                    </font>

@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 
 import com.cse305.Models.DataManager;
 import com.cse305.Models.Duty;
+import com.cse305.Models.Staff;
+import com.cse305.Models.User;
 
 public class SecurityStaffController implements Initializable {
 
@@ -140,6 +142,7 @@ public class SecurityStaffController implements Initializable {
 
     HashMap<String, Label> labelMap = new HashMap<>();
     DataManager dataManager = DataManager.getInstance();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize default view
@@ -161,15 +164,18 @@ public class SecurityStaffController implements Initializable {
 
         // Load duty information into labels for staff
         loadDutyToLabels();
+
+        // load staff salary information
+        
     }
 
-    public void loadDutyToLabels(){
+    public void loadDutyToLabels() {
         ArrayList<Duty> staffDuty = dataManager.getDutyOfLoggedInStaff();
         System.out.println("Loading duty for staff: " + staffDuty.size() + " duties found.");
 
         clearLabelsText();
 
-        for (Duty duty : staffDuty){
+        for (Duty duty : staffDuty) {
             String day = duty.DayOfWeek;
             String shift = duty.Shift;
             shift = shift.split(" ")[0];
@@ -182,11 +188,13 @@ public class SecurityStaffController implements Initializable {
 
         }
     }
-    public void clearLabelsText(){
+
+    public void clearLabelsText() {
         for (Label label : labelMap.values()) {
             label.setText("");
         }
     }
+
     public void setupMap() {
         labelMap.put("MondayMorning", MondayMorning);
         labelMap.put("MondayAfternoon", MondayAfternoon);
@@ -296,10 +304,16 @@ public class SecurityStaffController implements Initializable {
         labelTotalRequest.setText("5");
     }
 
+    // load salary of staff
     private void updateSalaryInfo() {
-        // TODO: Fetch actual data from database/service
-        TotalShift.setText("100");
-        Rate.setText("50$");
-        StaffSalary.setText("5,000$");
+        // // TODO: Fetch actual data from database/service
+        // TotalShift.setText("100");
+        // Rate.setText("50$");
+        // StaffSalary.setText("5,000$");
+        Staff staff = (Staff) dataManager.loggedInUser;
+        TotalShift.setText(Integer.toString(staff.getListOfDutyId().size()));
+        Rate.setText(50 + "$");
+        StaffSalary.setText(staff.getListOfDutyId().size() * 50 + "$");
     }
+
 }

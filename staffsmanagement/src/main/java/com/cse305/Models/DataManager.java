@@ -21,7 +21,7 @@ public class DataManager {
     public ArrayList<Request> requestList = new ArrayList<>(); // List of all requests made by staff
     public User loggedInUser;
     private final static String FILE_PATH = "data.lmao"; // Path to the file where data will be saved
-
+    
     private static DataManager instance;
 
     ////////////////////////////////////////////////////
@@ -249,6 +249,11 @@ public class DataManager {
             }
         }
         return staffDuties;
+    }
+
+    // get duty lists of all staff
+    public ArrayList<Duty> getDutyOfAllStaff(){
+        return dutyList;
     }
 
     // button to create a request as a staff

@@ -65,12 +65,12 @@ public class Staff extends User {
 
     void ViewRoutine() {
     };
-
+    // get salary
     String ViewSalary() {
         return "Total Salary: " + ListOfDutyId.size() * 50 + " $";
     };
-
     public ArrayList<String> getListOfRequestId() {
         return ListOfRequestId;
     }
+
 }
