@@ -276,6 +276,7 @@ public class DataManager {
 
         Request request = new Request(id, staffId, dutyId, type, false);
         requestList.add(request);
+        saveData();
         return currentStaff.addRequest(request.ID) ? "Request created successfully." : "Failed to create request.";
     }
 

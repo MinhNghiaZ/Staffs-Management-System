@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import com.cse305.Models.DataManager;
 import com.cse305.Models.Duty;
@@ -250,7 +251,14 @@ public class SecurityStaffController implements Initializable {
     @FXML
     private void handleCheckingButton(ActionEvent event) {
         // TODO: Implement checking functionality
+
+        //CHECKING THAT REQUEST WAS ADD SUCCESSFULLY TO DATABASE
         System.out.println("Checking button clicked");
+        for(var k : dataManager.requestList) {
+            System.out.println(k.DutyId);
+            System.out.println(k.Type);
+            System.out.println(k.StaffID);
+        }
     }
 
     @FXML
@@ -259,7 +267,18 @@ public class SecurityStaffController implements Initializable {
         String day = optionChooseDay.getValue();
         String shift = optionChooseShifts.getValue();
         String reason = txtRequestReason.getText();
+        Duty currentDuty = null;
+        String currentUserId = dataManager.loggedInUser.getId();
+        for(var duty : dataManager.dutyList) {
+            if(duty.DayOfWeek.equals(day) && duty.Shift.equals(shift) && duty.StaffID.equals(currentUserId)) {
+                currentDuty = duty;
+                break;
+            }
+        }
+        String requestId = UUID.randomUUID().toString();
 
+        dataManager.CreateRequest(requestId, currentDuty.ID, day + " " + shift);
+        
         System.out.println("Request submitted - Day: " + day + ", Shift: " + shift + ", Reason: " + reason);
     }
 

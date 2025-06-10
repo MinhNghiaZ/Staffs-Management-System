@@ -320,9 +320,9 @@ public class AdminController implements Initializable {
 
         // Initialize Time options
         optionSelectTime.getItems().addAll(
-                "Morning Shift (6:00 AM - 2:00 PM)",
-                "Afternoon Shift (2:00 PM - 10:00 PM)",
-                "Evening Shift (10:00 PM - 6:00 AM)");
+                "Morning Shift",
+                "Afternoon Shift",
+                "Evening Shift");
 
         // Initialize Working Place options
         optionSelectWorkingPlace.getItems().addAll(
