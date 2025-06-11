@@ -79,17 +79,18 @@ public class AdminController implements Initializable {
     private TableView<Request> RequestTable; // For Staff Request Panel
 
     // // Table columns for UserTable (Add Staff Panel)
-    // @FXML
-    // private TableColumn<User, String> colId;
 
-    // @FXML
-    // private TableColumn<User, String> colName;
+    @FXML
+    private TableColumn<User, String> colId;
 
-    // @FXML
-    // private TableColumn<User, String> colPassword;
+    @FXML
+    private TableColumn<User, String> colName;
 
-    // @FXML
-    // private TableColumn<User, String> colRole;
+    @FXML
+    private TableColumn<User, String> colPassword;
+
+    @FXML
+    private TableColumn<User, String> colRole;
 
     // Table columns for RequestTable (Staff Request Panel)
     @FXML
@@ -267,6 +268,10 @@ public class AdminController implements Initializable {
         SetUpRequestTable();
         LoadRequestTable();
 
+        // setup and load UserTable
+        SetUpUserTable();
+        LoadUserTable();
+
     }
 
     // Action button handlers
@@ -277,6 +282,7 @@ public class AdminController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        dataManager.saveData();
         System.out.println("Logout button clicked");
     }
 
@@ -287,6 +293,8 @@ public class AdminController implements Initializable {
         clearLabelsText();
         LoadDutyOfStaff();
         LoadRequestTable();
+        LoadSalaryTable();
+        SalaryTable.refresh();
         RequestTable.refresh();
         System.out.println("Accept request button clicked");
     }
@@ -296,6 +304,8 @@ public class AdminController implements Initializable {
         Request selectRequest = RequestTable.getSelectionModel().getSelectedItem();
         dataManager.processRequest(selectRequest.ID, false);
         LoadRequestTable();
+        LoadSalaryTable();
+        SalaryTable.refresh();
         RequestTable.refresh();
         System.out.println("Deny request button clicked");
     }
@@ -311,6 +321,9 @@ public class AdminController implements Initializable {
             dataManager.createManagerAccount(txtCreateEmployeeId.getText(), txtCreateName.getText(),
                     txtCreatePassword.getText());
         }
+        dataManager.saveData();
+        UserTable.refresh();
+        LoadUserTable();
         System.out.println("Create Account button clicked");
     }
 
@@ -376,6 +389,8 @@ public class AdminController implements Initializable {
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(false);
         SalaryPannel.setVisible(false);
+        UserTable.refresh();
+        LoadUserTable();
     }
 
     private void showAddSchedulePanel() {
@@ -400,7 +415,7 @@ public class AdminController implements Initializable {
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(false);
         SalaryPannel.setVisible(true);
-
+        SalaryTable.refresh();
     }
 
     static HashMap<String, Label> labelMap = new HashMap<>();
@@ -459,12 +474,10 @@ public class AdminController implements Initializable {
     public void SetUpSalaryTable() {
         staffNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().Name));
         staffIdCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().ID));
-        totalShiftCol.setCellValueFactory(
-                cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getListOfDutyId().size()));
+        totalShiftCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getListOfDutyId().size()));
         // need some change in salary and absent calculation
         // number of absent is the number of request that have the isAccepted is TRUE
-        dayAbsentCol
-                .setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getAbsent()));
+        dayAbsentCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getAbsent()));
         rateCol.setCellValueFactory(cellData -> new SimpleStringProperty("50$"));
         totalSalaryCol.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue().ViewSalary())));
     }
@@ -500,5 +513,28 @@ public class AdminController implements Initializable {
         ObservableList<Request> observableList = FXCollections.observableArrayList(requestList);
         RequestTable.setItems(observableList);
     }
+
+    // Set up User table
+    public void SetUpUserTable() {
+        colId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().ID));
+        colName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().Name));
+        colPassword.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().Password));
+        colRole.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().Role));
+    }
+
+    // load USER Table
+    public void LoadUserTable() {
+        ArrayList<User> UserList = dataManager.userList;
+        ObservableList<User> observableList = FXCollections.observableArrayList(UserList);
+        UserTable.setItems(observableList);
+    }
+    
+
+
+
+
+
+
+
 
 }

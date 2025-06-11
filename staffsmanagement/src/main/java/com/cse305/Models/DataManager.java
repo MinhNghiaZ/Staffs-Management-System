@@ -274,7 +274,7 @@ public class DataManager {
             }
         }
         
-        Request request = new Request(id, staffId, dutyId, type, null,reason);
+        Request request = new Request(id, staffId, dutyId, type, (Boolean) null,reason);
         requestList.add(request);
         saveData();
         return currentStaff.addRequest(request.ID) ? "Request created successfully." : "Failed to create request.";
@@ -345,6 +345,7 @@ public class DataManager {
                             }
                              System.out.println("Request " + requestId + " accepted. Duty " + request.DutyId
                                 + " removed from staff " + request.StaffID + ".");
+                                
                         }else{
                             System.out.println("Failed to remove duty " + request.DutyId + " from staff " + request.StaffID + ".");
                         }
@@ -356,9 +357,10 @@ public class DataManager {
                     System.out.println("Request reject");
                     request.reject();
                 }
+                saveData();
             }
         }
-        saveData();
+        
     }
 
 

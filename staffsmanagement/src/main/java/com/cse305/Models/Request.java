@@ -7,7 +7,7 @@ public class Request implements Serializable{
     public String StaffID;
     public String DutyId;
     public String Type;
-    public Boolean isAccepted = null;
+    public Boolean isAccepted;
     public String reason;
     public Request(String iD, String staffID, String dutyId, String type, Boolean isAccepted, String reason) {
         ID = iD;
@@ -23,5 +23,4 @@ public class Request implements Serializable{
     public void reject() {
         isAccepted = false;
     }
-
 }

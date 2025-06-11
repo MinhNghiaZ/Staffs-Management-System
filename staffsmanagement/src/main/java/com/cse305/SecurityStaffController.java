@@ -167,7 +167,7 @@ public class SecurityStaffController implements Initializable {
         loadDutyToLabels();
 
         // load staff salary information
-        
+
     }
 
     public void loadDutyToLabels() {
@@ -252,9 +252,9 @@ public class SecurityStaffController implements Initializable {
     private void handleCheckingButton(ActionEvent event) {
         // TODO: Implement checking functionality
 
-        //CHECKING THAT REQUEST WAS ADD SUCCESSFULLY TO DATABASE
+        // CHECKING THAT REQUEST WAS ADD SUCCESSFULLY TO DATABASE
         System.out.println("Checking button clicked");
-        for(var k : dataManager.requestList) {
+        for (var k : dataManager.requestList) {
             System.out.println(k.DutyId);
             System.out.println(k.Type);
             System.out.println(k.StaffID);
@@ -269,16 +269,17 @@ public class SecurityStaffController implements Initializable {
         String reason = txtRequestReason.getText();
         Duty currentDuty = null;
         String currentUserId = dataManager.loggedInUser.getId();
-        for(var duty : dataManager.dutyList) {
-            if(duty.DayOfWeek.equals(day) && duty.Shift.equals(shift) && duty.StaffID.equals(currentUserId)) {
+        for (var duty : dataManager.dutyList) {
+            if (duty.DayOfWeek.equals(day) && duty.Shift.equals(shift) && duty.StaffID.equals(currentUserId)) {
                 currentDuty = duty;
                 break;
             }
         }
         String requestId = UUID.randomUUID().toString();
+        Staff staff = (Staff) dataManager.loggedInUser;
+        staff.getListOfRequestId().add(requestId);
+        dataManager.CreateRequest(requestId, currentDuty.ID, day + " " + shift, reason);
 
-        dataManager.CreateRequest(requestId, currentDuty.ID, day + " " + shift,reason);
-        
         System.out.println("Request submitted - Day: " + day + ", Shift: " + shift + ", Reason: " + reason);
     }
 
@@ -317,15 +318,18 @@ public class SecurityStaffController implements Initializable {
     }
 
     private void updateHomeStatistics() {
-        Staff s = (Staff)dataManager.loggedInUser;
+        Staff s = (Staff) dataManager.loggedInUser;
         int shift = s.getListOfDutyId().size();
         int request = 0;
         int leave = 0;
-        for(var re : dataManager.requestList) {
-            if(re.isAccepted == true) {
+        for (var re : dataManager.requestList) {
+            // if (re.isAccepted == null) {
+            //     return;
+            // }
+            if (re.isAccepted == Boolean.TRUE) {
                 leave++;
             }
-            if(re.StaffID.equals(s.ID)) {
+            if (re.StaffID.equals(s.ID)) {
                 request++;
             }
         }

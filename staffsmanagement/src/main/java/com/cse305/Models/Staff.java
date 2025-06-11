@@ -1,10 +1,10 @@
 package com.cse305.Models;
 
-import com.cse305.Models.DataManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Staff extends User {
+public class Staff extends User{
     private ArrayList<String> ListOfDutyId = new ArrayList<>();
     private ArrayList<String> ListOfRequestId = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class Staff extends User {
 
     // get salary
     public String ViewSalary() {
-        return (ListOfDutyId.size()-getAbsent()) * 50 + " $";
+        return (ListOfDutyId.size()) * 50 + " $";
     };
 
     public ArrayList<String> getListOfRequestId() {
@@ -86,7 +86,7 @@ public class Staff extends User {
             RequestMap.put(request.ID, request.isAccepted);
         }
         for (String ID : this.ListOfRequestId) {
-            if (RequestMap.get(ID) == true) {
+            if (RequestMap.get(ID) == Boolean.TRUE) {
                 count++;
             }
         }
