@@ -80,13 +80,9 @@ public class Staff extends User{
     public int getAbsent() {
         DataManager dataManager = DataManager.getInstance();
         ArrayList<Request> requestList = dataManager.requestList;
-        HashMap<String, Boolean> RequestMap = new HashMap<>();
         int count = 0;
-        for (Request request : requestList) {
-            RequestMap.put(request.ID, request.isAccepted);
-        }
-        for (String ID : this.ListOfRequestId) {
-            if (RequestMap.get(ID) == Boolean.TRUE) {
+        for (Request re : requestList){
+            if (re.isAccepted != null && re.StaffID.equals(this.ID) && re.isAccepted == true){
                 count++;
             }
         }
