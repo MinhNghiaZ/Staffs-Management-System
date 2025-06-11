@@ -463,7 +463,7 @@ public class AdminController implements Initializable {
             String shift = duty.Shift;
             shift = shift.split(" ")[0];
             String key = day + shift;
-            System.out.println("Loading duty for key: " + key);
+            // System.out.println("Loading duty for key: " + key);
             Label label = labelMap.get(key);
             String dutyText = staffDutyMap.get(staffId) + "\n" + staffId;
             label.setText(dutyText);

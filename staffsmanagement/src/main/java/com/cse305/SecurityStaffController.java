@@ -181,7 +181,7 @@ public class SecurityStaffController implements Initializable {
             String shift = duty.Shift;
             shift = shift.split(" ")[0];
             String key = day + shift;
-            System.out.println("Loading duty for key: " + key);
+            // System.out.println("Loading duty for key: " + key);
             Label label = labelMap.get(key);
             String dutyText = duty.Place;
 
@@ -323,15 +323,22 @@ public class SecurityStaffController implements Initializable {
         int request = 0;
         int leave = 0;
         for (var re : dataManager.requestList) {
-            // if (re.isAccepted == null) {
-            //     return;
-            // }
-            if (re.isAccepted == Boolean.TRUE) {
-                leave++;
-            }
+
+            //  request is for this staff -> request++
             if (re.StaffID.equals(s.ID)) {
                 request++;
             }
+
+            // request not proccessed yet -> skip
+            if (re.isAccepted == null) {
+                continue;
+            }
+
+            // request is accepted -> leave++
+            if (re.isAccepted == true) {
+                leave++;
+            }
+
         }
         // TODO: Fetch actual data from database/service
         // labelTotalShift.setText("8");
