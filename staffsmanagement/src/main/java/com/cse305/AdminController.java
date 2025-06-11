@@ -24,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 
 import com.cse305.Models.DataManager;
 import com.cse305.Models.Duty;
+import com.cse305.Models.Request;
 import com.cse305.Models.User;
 import com.cse305.Models.Staff;
 
@@ -75,36 +76,39 @@ public class AdminController implements Initializable {
     private TableView<User> UserTable;
 
     @FXML
-    private TableView<User> RequestTable; // For Staff Request Panel
+    private TableView<Request> RequestTable; // For Staff Request Panel
 
-    // Table columns for UserTable (Add Staff Panel)
-    @FXML
-    private TableColumn<User, String> colId;
+    // // Table columns for UserTable (Add Staff Panel)
+    // @FXML
+    // private TableColumn<User, String> colId;
 
-    @FXML
-    private TableColumn<User, String> colName;
+    // @FXML
+    // private TableColumn<User, String> colName;
 
-    @FXML
-    private TableColumn<User, String> colPassword;
+    // @FXML
+    // private TableColumn<User, String> colPassword;
 
-    @FXML
-    private TableColumn<User, String> colRole;
+    // @FXML
+    // private TableColumn<User, String> colRole;
 
     // Table columns for RequestTable (Staff Request Panel)
     @FXML
-    private TableColumn<User, String> colId1;
+    private TableColumn<Request, String> colRequestID;
 
     @FXML
-    private TableColumn<User, String> colName1;
+    private TableColumn<Request, String> colStaffId;
 
     @FXML
-    private TableColumn<User, String> colPassword1;
+    private TableColumn<Request, String> colDutyId;
 
     @FXML
-    private TableColumn<User, String> colRole1;
+    private TableColumn<Request, String> ColType;
 
     @FXML
-    private TableColumn<User, String> colRole11;
+    private TableColumn<Request, String> ColReason;
+
+    @FXML
+    private TableColumn<Request, String> colStatus;
 
     // Text fields for Add Staff form
     @FXML
@@ -195,7 +199,7 @@ public class AdminController implements Initializable {
     @FXML
     private Label SaturdayEvening;
 
-    //Salary Table
+    // Salary Table
     @FXML
     private TableView<Staff> SalaryTable;
 
@@ -218,7 +222,6 @@ public class AdminController implements Initializable {
     private TableColumn<Staff, String> totalSalaryCol;
 
     public boolean flag = false;
-    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -246,19 +249,24 @@ public class AdminController implements Initializable {
 
         // Initialize the ChoiceBox options
         initializeChoiceBoxes();
-        
-        //apply scheduel duty
+
+        // apply scheduel duty
         setupMap();
         clearLabelsText();
         LoadDutyOfStaff();
 
-        //setup and load SalaryTable
-        
+        // setup and load SalaryTable
+
         SetUpSalaryTable();
         LoadSalaryTable();
 
-        //tét check if the PANEL load fully
+        // tét check if the PANEL load fully
         flag = true;
+
+        // setup and load RequestTable
+        SetUpRequestTable();
+        LoadRequestTable();
+
     }
 
     // Action button handlers
@@ -274,11 +282,21 @@ public class AdminController implements Initializable {
 
     private void handleAcceptRequest() {
         // TODO: Implement accept request functionality
+        Request selectRequest = RequestTable.getSelectionModel().getSelectedItem();
+        dataManager.processRequest(selectRequest.ID, true);
+        clearLabelsText();
+        LoadDutyOfStaff();
+        LoadRequestTable();
+        RequestTable.refresh();
         System.out.println("Accept request button clicked");
     }
 
     private void handleDenyRequest() {
         // TODO: Implement deny request functionality
+        Request selectRequest = RequestTable.getSelectionModel().getSelectedItem();
+        dataManager.processRequest(selectRequest.ID, false);
+        LoadRequestTable();
+        RequestTable.refresh();
         System.out.println("Deny request button clicked");
     }
 
@@ -347,7 +365,7 @@ public class AdminController implements Initializable {
         StaffRequestPanel.setVisible(false);
         SalaryPannel.setVisible(false);
 
-        if(flag) {
+        if (flag) {
             LoadDutyOfStaff();
         }
     }
@@ -386,6 +404,7 @@ public class AdminController implements Initializable {
     }
 
     static HashMap<String, Label> labelMap = new HashMap<>();
+
     // setup Map
     public void setupMap() {
         labelMap.put("MondayMorning", MondayMorning);
@@ -419,7 +438,7 @@ public class AdminController implements Initializable {
     public void LoadDutyOfStaff() {
         ArrayList<Duty> dutyList = dataManager.getDutyOfAllStaff();
         ArrayList<Staff> staffList = dataManager.getStaffList();
-        HashMap<String,String> staffDutyMap = new HashMap<>();
+        HashMap<String, String> staffDutyMap = new HashMap<>();
         for (Staff staff : staffList) {
             staffDutyMap.put(staff.ID, staff.Name);
         }
@@ -431,30 +450,55 @@ public class AdminController implements Initializable {
             String key = day + shift;
             System.out.println("Loading duty for key: " + key);
             Label label = labelMap.get(key);
-            String dutyText = staffDutyMap.get(staffId)+"\n"+staffId;
+            String dutyText = staffDutyMap.get(staffId) + "\n" + staffId;
             label.setText(dutyText);
         }
     }
 
-    //Set up the salary table column
-    public void SetUpSalaryTable(){
+    // Set up the salary table column
+    public void SetUpSalaryTable() {
         staffNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().Name));
         staffIdCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().ID));
-        totalShiftCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getListOfDutyId().size()));
-        //need some change in salary and absent calculation 
-        //number of absent is the number of request that have the isAccepted is TRUE
-        dayAbsentCol.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getListOfRequestId().size()));
+        totalShiftCol.setCellValueFactory(
+                cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getListOfDutyId().size()));
+        // need some change in salary and absent calculation
+        // number of absent is the number of request that have the isAccepted is TRUE
+        dayAbsentCol
+                .setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<Integer>(cellData.getValue().getAbsent()));
         rateCol.setCellValueFactory(cellData -> new SimpleStringProperty("50$"));
-        totalSalaryCol.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue().getListOfDutyId().size() * 50) + "$"));
+        totalSalaryCol.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue().ViewSalary())));
     }
-    
-    //Load Table Salary
-    public void LoadSalaryTable(){
+
+    // Load Table Salary
+    public void LoadSalaryTable() {
         ArrayList<Staff> staffList = dataManager.getStaffList();
         ObservableList<Staff> observableList = FXCollections.observableArrayList(staffList);
         SalaryTable.setItems(observableList);
     }
 
+    // set up request table
+    public void SetUpRequestTable() {
+        colRequestID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().ID));
+        colStaffId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().StaffID));
+        colDutyId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().DutyId));
+        ColType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().Type));
+        ColReason.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().reason));
+        colStatus.setCellValueFactory(cellData -> {
+            String status = "Pending";
+            if (Boolean.TRUE.equals(cellData.getValue().isAccepted)) {
+                status = "Accepted";
+            } else if (Boolean.FALSE.equals(cellData.getValue().isAccepted)) {
+                status = "Denied";
+            }
+            return new SimpleStringProperty(status);
+        });
+    }
 
-    
+    // load Request Table
+    public void LoadRequestTable() {
+        ArrayList<Request> requestList = dataManager.requestList;
+        ObservableList<Request> observableList = FXCollections.observableArrayList(requestList);
+        RequestTable.setItems(observableList);
+    }
+
 }

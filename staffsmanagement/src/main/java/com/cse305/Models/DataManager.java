@@ -263,7 +263,7 @@ public class DataManager {
     }
 
     // button to create a request as a staff
-    public String CreateRequest(String id, String dutyId, String type) {
+    public String CreateRequest(String id, String dutyId, String type,String reason) {
         // May need to check if request for this duty already exists
         Staff currentStaff = (Staff) loggedInUser;
         String staffId = currentStaff.getId();
@@ -273,8 +273,8 @@ public class DataManager {
                 return "Request for this duty already exists.";
             }
         }
-
-        Request request = new Request(id, staffId, dutyId, type, false);
+        
+        Request request = new Request(id, staffId, dutyId, type, null,reason);
         requestList.add(request);
         saveData();
         return currentStaff.addRequest(request.ID) ? "Request created successfully." : "Failed to create request.";
@@ -349,16 +349,16 @@ public class DataManager {
                             System.out.println("Failed to remove duty " + request.DutyId + " from staff " + request.StaffID + ".");
                         }
                         // maybe need to remove the duty from dutyList as well
-
-                       
                     } else {
                         System.out.println("Staff with ID " + request.StaffID + " does not exist.");
                     }
                 } else {
+                    System.out.println("Request reject");
                     request.reject();
                 }
             }
         }
+        saveData();
     }
 
 

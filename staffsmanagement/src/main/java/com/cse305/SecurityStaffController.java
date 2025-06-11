@@ -277,7 +277,7 @@ public class SecurityStaffController implements Initializable {
         }
         String requestId = UUID.randomUUID().toString();
 
-        dataManager.CreateRequest(requestId, currentDuty.ID, day + " " + shift);
+        dataManager.CreateRequest(requestId, currentDuty.ID, day + " " + shift,reason);
         
         System.out.println("Request submitted - Day: " + day + ", Shift: " + shift + ", Reason: " + reason);
     }
@@ -348,7 +348,7 @@ public class SecurityStaffController implements Initializable {
         Staff staff = (Staff) dataManager.loggedInUser;
         TotalShift.setText(Integer.toString(staff.getListOfDutyId().size()));
         Rate.setText(50 + "$");
-        StaffSalary.setText(staff.getListOfDutyId().size() * 50 + "$");
+        StaffSalary.setText(staff.ViewSalary());
     }
 
 }

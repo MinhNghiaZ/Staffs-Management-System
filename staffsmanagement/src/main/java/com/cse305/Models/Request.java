@@ -7,15 +7,16 @@ public class Request implements Serializable{
     public String StaffID;
     public String DutyId;
     public String Type;
-    public boolean isAccepted;
-    public Request(String iD, String staffID, String dutyId, String type, boolean isAccepted) {
+    public Boolean isAccepted = null;
+    public String reason;
+    public Request(String iD, String staffID, String dutyId, String type, Boolean isAccepted, String reason) {
         ID = iD;
         StaffID = staffID;
         DutyId = dutyId;
         Type = type;
         this.isAccepted = isAccepted;
+        this.reason = reason;
     }
-
     public void accept() {
         isAccepted = true;
     }

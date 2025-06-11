@@ -1,6 +1,8 @@
 package com.cse305.Models;
 
+import com.cse305.Models.DataManager;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Staff extends User {
     private ArrayList<String> ListOfDutyId = new ArrayList<>();
@@ -8,7 +10,7 @@ public class Staff extends User {
 
     public Staff(String id, String name, String password) {
         super(id, name, password, "Staff");
-        //ListOfDutyId = (listOfDuty != null) ? listOfDuty : new ArrayList<>();   
+        // ListOfDutyId = (listOfDuty != null) ? listOfDuty : new ArrayList<>();
     }
 
     public ArrayList<String> getListOfDutyId() {
@@ -40,7 +42,7 @@ public class Staff extends User {
         return sb.toString();
     };
 
-    public boolean addRequest(Request request){
+    public boolean addRequest(Request request) {
         if (ListOfRequestId.contains(request.ID)) {
             System.out.println("Request with ID " + request.ID + " already exists.");
             return false;
@@ -65,12 +67,30 @@ public class Staff extends User {
 
     void ViewRoutine() {
     };
+
     // get salary
-    String ViewSalary() {
-        return "Total Salary: " + ListOfDutyId.size() * 50 + " $";
+    public String ViewSalary() {
+        return (ListOfDutyId.size()-getAbsent()) * 50 + " $";
     };
+
     public ArrayList<String> getListOfRequestId() {
         return ListOfRequestId;
     }
 
+    public int getAbsent() {
+        DataManager dataManager = DataManager.getInstance();
+        ArrayList<Request> requestList = dataManager.requestList;
+        HashMap<String, Boolean> RequestMap = new HashMap<>();
+        int count = 0;
+        for (Request request : requestList) {
+            RequestMap.put(request.ID, request.isAccepted);
+        }
+        for (String ID : this.ListOfRequestId) {
+            if (RequestMap.get(ID) == true) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
 }
