@@ -1,14 +1,16 @@
 package com.cse305.Models;
 
-import java.util.ArrayList;
 
-public class Staff extends User {
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Staff extends User{
     private ArrayList<String> ListOfDutyId = new ArrayList<>();
     private ArrayList<String> ListOfRequestId = new ArrayList<>();
 
-    public Staff(String id, String name, String password, ArrayList<String> listOfDuty) {
+    public Staff(String id, String name, String password) {
         super(id, name, password, "Staff");
-        ListOfDutyId = listOfDuty;
+        // ListOfDutyId = (listOfDuty != null) ? listOfDuty : new ArrayList<>();
     }
 
     public ArrayList<String> getListOfDutyId() {
@@ -40,7 +42,7 @@ public class Staff extends User {
         return sb.toString();
     };
 
-    public boolean addRequest(Request request){
+    public boolean addRequest(Request request) {
         if (ListOfRequestId.contains(request.ID)) {
             System.out.println("Request with ID " + request.ID + " already exists.");
             return false;
@@ -66,11 +68,25 @@ public class Staff extends User {
     void ViewRoutine() {
     };
 
-    String ViewSalary() {
-        return "Total Salary: " + ListOfDutyId.size() * 50 + " $";
+    // get salary
+    public String ViewSalary() {
+        return (ListOfDutyId.size()) * 50 + " $";
     };
 
     public ArrayList<String> getListOfRequestId() {
         return ListOfRequestId;
     }
+
+    public int getAbsent() {
+        DataManager dataManager = DataManager.getInstance();
+        ArrayList<Request> requestList = dataManager.requestList;
+        int count = 0;
+        for (Request re : requestList){
+            if (re.isAccepted != null && re.StaffID.equals(this.ID) && re.isAccepted == true){
+                count++;
+            }
+        }
+        return count;
+    }
+    
 }

@@ -37,8 +37,10 @@ public class PrimaryController {
     public TextField UserDutyID;
 
     public void initialize() {
-        dataManager.createManagerAccount("id1", "Nguyen Van A", "123");
-        dataManager.createStaffAccount("id2", "Pham Thi B", "123");
+        // dataManager.createManagerAccount("id1", "Nguyen Van A", "123");
+        // dataManager.createStaffAccount("id2", "Pham Thi B", "123");
+        // dataManager.saveData();
+        dataManager.loadData();
     }
 
     //LOGIN DONE LOGIN
@@ -64,7 +66,7 @@ public class PrimaryController {
                 }
             }
         }
-        dataManager.login(id, pass);
+        //dataManager.login(id, pass);
     }   
 
     //CREATE USER
@@ -89,19 +91,19 @@ public class PrimaryController {
     }
 
     //manager
-    public void createDuty() {
-        String dutyID = DutyID.getText();
-        String dutyName = DutyName.getText();
-        String dutyShift = DutyShift.getText();
-        String dutyDay = DutyDay.getText();
-        String userDutyID = UserDutyID.getText();
+    // public void createDuty() {
+    //     String dutyID = DutyID.getText();
+    //     String dutyName = DutyName.getText();
+    //     String dutyShift = DutyShift.getText();
+    //     String dutyDay = DutyDay.getText();
+    //     String userDutyID = UserDutyID.getText();
         
-        if (dataManager.giveDuty(dutyID, dutyName, userDutyID, dutyDay, dutyShift)){
-            System.out.println("Create duty successfuly");
-        }else{
-            System.out.println("Create duty failed");
-        }             
-    }
+    //     if (dataManager.giveDuty(dutyID, dutyName, userDutyID, dutyDay, dutyShift)){
+    //         System.out.println("Create duty successfuly");
+    //     }else{
+    //         System.out.println("Create duty failed");
+    //     }             
+    // }
 
     //manager
     
