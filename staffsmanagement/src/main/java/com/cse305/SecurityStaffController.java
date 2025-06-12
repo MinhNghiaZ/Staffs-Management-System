@@ -258,6 +258,7 @@ public class SecurityStaffController implements Initializable {
             System.out.println(k.DutyId);
             System.out.println(k.Type);
             System.out.println(k.StaffID);
+            System.out.println("-------");
         }
     }
 
@@ -335,7 +336,7 @@ public class SecurityStaffController implements Initializable {
             }
 
             // request is accepted -> leave++
-            if (re.isAccepted == true) {
+            if (re.isAccepted == true && re.StaffID.equals(s.ID)) {
                 leave++;
             }
 

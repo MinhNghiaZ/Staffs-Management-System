@@ -177,7 +177,7 @@
                                                       <Font name="Tahoma Bold" size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Label alignment="CENTER" layoutX="115.0" layoutY="5.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
+                                                <Label fx:id="TotalEmployeeLabel" alignment="CENTER" layoutX="115.0" layoutY="5.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="Arial Bold" size="72.0" />
                                                    </font>
@@ -191,12 +191,12 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="306.0" layoutY="8.0" prefHeight="142.0" prefWidth="254.0" styleClass="card" stylesheets="@AdminUi.css">
                                              <children>
-                                                <Label layoutX="120.0" layoutY="107.0" text="Total Present" textFill="WHITE">
+                                                <Label layoutX="120.0" layoutY="107.0" text="Request Remain" textFill="WHITE">
                                                    <font>
                                                       <Font name="Tahoma Bold" size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Label alignment="CENTER" layoutX="118.0" layoutY="8.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
+                                                <Label fx:id="TotalPresentLabel" alignment="CENTER" layoutX="118.0" layoutY="8.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="Arial Bold" size="72.0" />
                                                    </font>
@@ -215,7 +215,7 @@
                                                       <Font name="Tahoma Bold" size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Label alignment="CENTER" layoutX="117.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
+                                                <Label fx:id="TotalLeaveLabel" alignment="CENTER" layoutX="117.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="Arial Bold" size="72.0" />
                                                    </font>

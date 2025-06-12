@@ -13,6 +13,8 @@ import java.util.UUID;
 
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class DataManager {
 
@@ -97,6 +99,12 @@ public class DataManager {
         password = AES.encrypt(password);
         if (checkExist(id)) {
             System.out.println("ID already exists. Please choose a different ID.");
+            //show alert
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("ERROR");
+            alert.setContentText("This ID is already existed");
+            alert.showAndWait();
             return false;
         }
         //ArrayList<String> list = new ArrayList<>();
@@ -125,7 +133,11 @@ public class DataManager {
                 return true;
             }
         }
-
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("ERROR");
+        alert.setContentText("Login failed. Incorrect password.");
+        alert.showAndWait();
         System.out.println("Login failed. Incorrect password.");
         return false;
     }
@@ -168,6 +180,11 @@ public class DataManager {
         Duty newDuty = new Duty(dutyID, name, staffId, day, shift);
         for(var u : userList) {
             if(u.ID.equals(staffId) && u.Role.equals("Manager")) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Cannot assisgn duty for manager");
+                alert.showAndWait();
                 System.out.println("Cannot assisgn duty for manager");
                 return false;
             }
@@ -177,6 +194,11 @@ public class DataManager {
         for (Duty duty : dutyList){
             if (duty.DayOfWeek.equals(newDuty.DayOfWeek) && duty.Shift.equals(newDuty.Shift)){
                 System.out.println("ERROR: This shift already has a duty.");
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("ERROR");
+                alert.setContentText("This shift already has a duty.");
+                alert.showAndWait();
                 return false;
             }
         }

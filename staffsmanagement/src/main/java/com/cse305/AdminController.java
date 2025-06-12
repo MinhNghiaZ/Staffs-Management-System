@@ -222,6 +222,13 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<Staff, String> totalSalaryCol;
 
+    @FXML
+    private Label TotalEmployeeLabel;
+    @FXML
+    private Label TotalPresentLabel;
+    @FXML
+    private Label TotalLeaveLabel;
+
     public boolean flag = false;
 
     @Override
@@ -377,6 +384,10 @@ public class AdminController implements Initializable {
         AddSchedulePanel.setVisible(false);
         StaffRequestPanel.setVisible(false);
         SalaryPannel.setVisible(false);
+        
+        TotalEmployeeLabel.setText(String.valueOf(dataManager.userList.size()));
+        TotalLeaveLabel.setText(String.valueOf(findTotalLeave()));
+        TotalPresentLabel.setText(String.valueOf(findTotalRequestRemain()));
 
         if (flag) {
             LoadDutyOfStaff();
@@ -528,13 +539,27 @@ public class AdminController implements Initializable {
         ObservableList<User> observableList = FXCollections.observableArrayList(UserList);
         UserTable.setItems(observableList);
     }
-    
 
+    public int findTotalLeave() {
+        int count = 0;
+        for(var re : dataManager.requestList) {
+            if(re.isAccepted == null) {
+                continue;
+            }
+            if(re.isAccepted) {
+                count++;
+            }
+        }
+        return count;
+    }
 
-
-
-
-
-
-
+    public int findTotalRequestRemain() {
+        int count = 0;
+        for(var re : dataManager.requestList) {
+            if(re.isAccepted == null) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
