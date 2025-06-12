@@ -23,7 +23,7 @@ public class DataManager {
     public ArrayList<Request> requestList = new ArrayList<>(); // List of all requests made by staff
     public User loggedInUser;
     private final static String FILE_PATH = "data.lmao"; // Path to the file where data will be saved
-    
+
     private static DataManager instance;
 
     ////////////////////////////////////////////////////
@@ -38,25 +38,26 @@ public class DataManager {
         return instance;
     }
 
-    public void saveData(){
-        try{
+    public void saveData() {
+        try {
             FileOutputStream fos = new FileOutputStream(FILE_PATH);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             DataContainer container = new DataContainer(userList, dutyList, requestList);
             oos.writeObject(container);
             oos.close();
             System.out.println("Data saved successfully");
-        }catch (IOException e){
-            System.out.println("Error saving: "+e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error saving: " + e.getMessage());
         }
     }
+
     public void loadData() {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             System.out.println("File " + FILE_PATH + " not found. Starting with empty data.");
             return;
         }
-        try{
+        try {
             FileInputStream fis = new FileInputStream(FILE_PATH);
             ObjectInputStream ois = new ObjectInputStream(fis);
             DataContainer container = (DataContainer) ois.readObject();
@@ -71,9 +72,9 @@ public class DataManager {
             ois.close();
             System.out.println("Data loaded successfully");
 
-        }catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("Error loading: " + e.getMessage());
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error loading: " + e.getMessage());
         }
     }
@@ -89,7 +90,7 @@ public class DataManager {
         userList.add(newManager);
         System.out.println("Manager account created successfully.");
 
-        //save data
+        // save data
         saveData();
         return true;
     }
@@ -99,7 +100,7 @@ public class DataManager {
         password = AES.encrypt(password);
         if (checkExist(id)) {
             System.out.println("ID already exists. Please choose a different ID.");
-            //show alert
+            // show alert
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("ERROR");
             alert.setHeaderText("ERROR");
@@ -107,12 +108,12 @@ public class DataManager {
             alert.showAndWait();
             return false;
         }
-        //ArrayList<String> list = new ArrayList<>();
+        // ArrayList<String> list = new ArrayList<>();
         Staff newStaff = new Staff(id, name, password);
         userList.add(newStaff);
         System.out.println("Staff account created successfully.");
 
-        //save data
+        // save data
         saveData();
         return true;
     }
@@ -123,6 +124,11 @@ public class DataManager {
 
         if (checkExist(id) == false) {
             System.out.println("ID does not exist. Please register first.");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("ERROR");
+            alert.setContentText("ID does not exist. Please register first.");
+            alert.showAndWait();
             return false;
         }
 
@@ -175,11 +181,11 @@ public class DataManager {
 
     // giveDuty using staff object
     public boolean giveDuty(String name, String staffId, String day, String shift) {
-        //Duty newDuty = new Duty(id, name, staffId, day, shift);
+        // Duty newDuty = new Duty(id, name, staffId, day, shift);
         String dutyID = UUID.randomUUID().toString();
         Duty newDuty = new Duty(dutyID, name, staffId, day, shift);
-        for(var u : userList) {
-            if(u.ID.equals(staffId) && u.Role.equals("Manager")) {
+        for (var u : userList) {
+            if (u.ID.equals(staffId) && u.Role.equals("Manager")) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("ERROR");
                 alert.setHeaderText("ERROR");
@@ -190,9 +196,9 @@ public class DataManager {
             }
         }
         Staff s = (Staff) getUserById(staffId);
-        
-        for (Duty duty : dutyList){
-            if (duty.DayOfWeek.equals(newDuty.DayOfWeek) && duty.Shift.equals(newDuty.Shift)){
+
+        for (Duty duty : dutyList) {
+            if (duty.DayOfWeek.equals(newDuty.DayOfWeek) && duty.Shift.equals(newDuty.Shift)) {
                 System.out.println("ERROR: This shift already has a duty.");
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("ERROR");
@@ -203,14 +209,14 @@ public class DataManager {
             }
         }
 
-        if (s.addDuty(newDuty)){
+        if (s.addDuty(newDuty)) {
             dutyList.add(newDuty);
             saveData();
             return true;
         }
-        
+
         return false;
-        
+
     }
 
     public ArrayList<Staff> getStaffList() {
@@ -262,7 +268,7 @@ public class DataManager {
     }
 
     // Get the list of duties assigned to the logged-in staff
-    public ArrayList<Duty> getDutyOfLoggedInStaff(){
+    public ArrayList<Duty> getDutyOfLoggedInStaff() {
         if (!loggedInUser.getRole().equals("Staff")) {
             System.out.println("You are not Staff, Cannot view your own duty.");
             return new ArrayList<>();
@@ -280,23 +286,24 @@ public class DataManager {
     }
 
     // get duty lists of all staff
-    public ArrayList<Duty> getDutyOfAllStaff(){
+    public ArrayList<Duty> getDutyOfAllStaff() {
         return dutyList;
     }
 
     // button to create a request as a staff
-    public String CreateRequest(String id, String dutyId, String type,String reason) {
+    public String CreateRequest(String id, String dutyId, String type, String reason) {
         // May need to check if request for this duty already exists
         Staff currentStaff = (Staff) loggedInUser;
         String staffId = currentStaff.getId();
 
         for (Request request : requestList) {
-            if (request.DutyId.equals(dutyId) && request.StaffID.equals(staffId)) {
+            if (request.DutyId.equals(dutyId) && request.StaffID.equals(staffId) && request.isAccepted == null) {
+                System.out.println("loiox1");
                 return "Request for this duty already exists.";
             }
         }
-        
-        Request request = new Request(id, staffId, dutyId, type, (Boolean) null,reason);
+
+        Request request = new Request(id, staffId, dutyId, type, (Boolean) null, reason);
         requestList.add(request);
         saveData();
         return currentStaff.addRequest(request.ID) ? "Request created successfully." : "Failed to create request.";
@@ -354,6 +361,9 @@ public class DataManager {
     public void processRequest(String requestId, boolean isAccepted) {
         for (Request request : requestList) {
             if (request.ID.equals(requestId)) {
+                if (request.isAccepted != null){
+                    return;
+                }
                 if (isAccepted) {
                     request.accept();
                     Staff staff = (Staff) getUserById(request.StaffID);
@@ -365,11 +375,12 @@ public class DataManager {
                                     break;
                                 }
                             }
-                             System.out.println("Request " + requestId + " accepted. Duty " + request.DutyId
-                                + " removed from staff " + request.StaffID + ".");
-                                
-                        }else{
-                            System.out.println("Failed to remove duty " + request.DutyId + " from staff " + request.StaffID + ".");
+                            System.out.println("Request " + requestId + " accepted. Duty " + request.DutyId
+                                    + " removed from staff " + request.StaffID + ".");
+
+                        } else {
+                            System.out.println(
+                                    "Failed to remove duty " + request.DutyId + " from staff " + request.StaffID + ".");
                         }
                         // maybe need to remove the duty from dutyList as well
                     } else {
@@ -382,15 +393,15 @@ public class DataManager {
                 saveData();
             }
         }
-        
+
     }
 
-
     // DataContainer class to hold all data for serialization
-    public static class DataContainer implements Serializable{
+    public static class DataContainer implements Serializable {
         public ArrayList<User> userList;
         public ArrayList<Duty> dutyList;
         public ArrayList<Request> requestList;
+
         public DataContainer(ArrayList<User> userList, ArrayList<Duty> dutyList, ArrayList<Request> requestList) {
             this.userList = userList;
             this.dutyList = dutyList;

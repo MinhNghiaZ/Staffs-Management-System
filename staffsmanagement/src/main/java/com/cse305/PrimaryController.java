@@ -66,7 +66,7 @@ public class PrimaryController {
                 }
             }
         }
-        dataManager.login(id, pass);
+        //dataManager.login(id, pass);
     }   
 
     //CREATE USER

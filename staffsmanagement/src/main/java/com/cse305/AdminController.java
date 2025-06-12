@@ -336,6 +336,9 @@ public class AdminController implements Initializable {
 
     private void handleReset() {
         // TODO: Implement reset form functionality
+        txtCreateEmployeeId.setText("");
+        txtCreateName.setText("");
+        txtCreatePassword.setText("");
         System.out.println("Reset button clicked");
     }
 

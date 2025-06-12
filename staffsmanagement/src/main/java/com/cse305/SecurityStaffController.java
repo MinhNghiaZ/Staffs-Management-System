@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -33,9 +35,6 @@ public class SecurityStaffController implements Initializable {
 
     @FXML
     private Button btnSalary;
-
-    @FXML
-    private Button btnChangeInformation;
 
     // Panels
     @FXML
@@ -79,9 +78,6 @@ public class SecurityStaffController implements Initializable {
 
     @FXML
     private TextArea txtRequestReason;
-
-    @FXML
-    private Button btnChecking;
 
     @FXML
     private Button btnRequest;
@@ -141,6 +137,9 @@ public class SecurityStaffController implements Initializable {
     @FXML
     private Label SaturdayEvening;
 
+    @FXML
+    private Label staffNamePannel;
+
     HashMap<String, Label> labelMap = new HashMap<>();
     DataManager dataManager = DataManager.getInstance();
 
@@ -153,8 +152,7 @@ public class SecurityStaffController implements Initializable {
         btnHome.setOnAction(this::handleHomeButton);
         btnSalary.setOnAction(this::handleSalaryButton);
         btnRequestLeave.setOnAction(this::handleRequestLeaveButton);
-        btnChangeInformation.setOnAction(this::handleChangeInformationButton);
-        btnChecking.setOnAction(this::handleCheckingButton);
+
         btnRequest.setOnAction(this::handleRequestSubmitButton);
 
         // Initialize choice boxes
@@ -168,6 +166,7 @@ public class SecurityStaffController implements Initializable {
 
         // load staff salary information
 
+        staffNamePannel.setText(dataManager.loggedInUser.Name);
     }
 
     public void loadDutyToLabels() {
@@ -243,26 +242,6 @@ public class SecurityStaffController implements Initializable {
     }
 
     @FXML
-    private void handleChangeInformationButton(ActionEvent event) {
-        // TODO: Implement change information functionality
-        System.out.println("Change Information clicked");
-    }
-
-    @FXML
-    private void handleCheckingButton(ActionEvent event) {
-        // TODO: Implement checking functionality
-
-        // CHECKING THAT REQUEST WAS ADD SUCCESSFULLY TO DATABASE
-        System.out.println("Checking button clicked");
-        for (var k : dataManager.requestList) {
-            System.out.println(k.DutyId);
-            System.out.println(k.Type);
-            System.out.println(k.StaffID);
-            System.out.println("-------");
-        }
-    }
-
-    @FXML
     private void handleRequestSubmitButton(ActionEvent event) {
         // TODO: Implement request submission functionality
         String day = optionChooseDay.getValue();
@@ -276,11 +255,25 @@ public class SecurityStaffController implements Initializable {
                 break;
             }
         }
+        if (currentDuty == null) {
+            System.out.println("No duty exist");
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("Requested shift doesn't exist");
+            alert.showAndWait();
+            return;
+        }
         String requestId = UUID.randomUUID().toString();
-        Staff staff = (Staff) dataManager.loggedInUser;
-        staff.getListOfRequestId().add(requestId);
-        dataManager.CreateRequest(requestId, currentDuty.ID, day + " " + shift, reason);
+        // Staff staff = (Staff) dataManager.loggedInUser;
+        // staff.getListOfRequestId().add(requestId);
 
+        String s = dataManager.CreateRequest(requestId, currentDuty.ID, day + " " + shift, reason);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Message");
+        alert.setHeaderText("Message");
+        alert.setContentText(s);
+        alert.showAndWait();
         System.out.println("Request submitted - Day: " + day + ", Shift: " + shift + ", Reason: " + reason);
     }
 
@@ -325,7 +318,7 @@ public class SecurityStaffController implements Initializable {
         int leave = 0;
         for (var re : dataManager.requestList) {
 
-            //  request is for this staff -> request++
+            // request is for this staff -> request++
             if (re.StaffID.equals(s.ID)) {
                 request++;
             }

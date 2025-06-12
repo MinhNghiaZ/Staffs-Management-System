@@ -156,7 +156,7 @@
                <center>
                   <AnchorPane prefHeight="537.0" prefWidth="859.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane id="MainPage" fx:id="HomePanel" layoutX="60.0" layoutY="110.0" prefHeight="554.4" prefWidth="887.2" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane id="MainPage" fx:id="HomePanel" layoutX="60.0" layoutY="110.0" prefHeight="554.4" prefWidth="887.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="9.0" layoutY="8.0" prefHeight="539.0" prefWidth="867.0" stylesheets="@AdminUi.css">
                                  <styleClass>
@@ -191,12 +191,12 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="306.0" layoutY="8.0" prefHeight="142.0" prefWidth="254.0" styleClass="card" stylesheets="@AdminUi.css">
                                              <children>
-                                                <Label layoutX="120.0" layoutY="107.0" text="Request Remain" textFill="WHITE">
+                                                <Label layoutX="94.0" layoutY="107.0" text="Request Remain" textFill="WHITE">
                                                    <font>
                                                       <Font name="Tahoma Bold" size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="TotalPresentLabel" alignment="CENTER" layoutX="118.0" layoutY="8.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
+                                                <Label fx:id="TotalPresentLabel" alignment="CENTER" layoutX="106.0" layoutY="8.0" prefHeight="98.0" prefWidth="124.0" text="0" textFill="WHITE">
                                                    <font>
                                                       <Font name="Arial Bold" size="72.0" />
                                                    </font>
@@ -429,12 +429,6 @@
                                                 <TableColumn fx:id="colRole" prefWidth="189.60003662109375" text="Role" />
                                             </columns>
                                           </TableView>
-                                          <TextField layoutX="558.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Search" />
-                                          <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="811.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@images/magnifying-glass.png" />
-                                             </image>
-                                          </ImageView>
                                           <Label layoutX="14.0" layoutY="11.0" text="List Employee">
                                              <font>
                                                 <Font name="Tahoma Bold" size="28.0" />
@@ -579,7 +573,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane id="AddPage" fx:id="StaffRequestPanel" layoutX="10.0" layoutY="10.0" prefHeight="554.4" prefWidth="887.2">
+                        <AnchorPane id="AddPage" fx:id="StaffRequestPanel" layoutX="10.0" layoutY="10.0" prefHeight="554.4" prefWidth="887.2" visible="false">
                            <children>
                               <AnchorPane layoutX="8.0" layoutY="9.0" prefHeight="538.0" prefWidth="870.0" stylesheets="@AdminUi.css">
                                  <children>
