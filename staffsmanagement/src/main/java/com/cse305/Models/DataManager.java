@@ -82,6 +82,7 @@ public class DataManager {
     public boolean createManagerAccount(String id, String name, String password) {
         // encrypt password before storing
         password = AES.encrypt(password);
+
         if (checkExist(id)) {
             System.out.println("ID already exists. Please choose a different ID.");
             return false;
@@ -121,7 +122,7 @@ public class DataManager {
     public boolean login(String id, String password) {
         // encrypt password before checking
         password = AES.encrypt(password);
-
+        
         if (checkExist(id) == false) {
             System.out.println("ID does not exist. Please register first.");
             Alert alert = new Alert(AlertType.INFORMATION);
